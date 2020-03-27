@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#65F5B7;}
+	.st1{fill:none;stroke:#070504;stroke-width:6;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#000100;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+	.st3{fill:#000100;}
+	.st4{fill:#070504;}
+	.st5{fill:none;stroke:#070504;stroke-width:5;stroke-linecap:round;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#070504;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+	.st7{fill:#F56C6C;}
+	.st8{fill:none;stroke:#000000;stroke-width:6;stroke-miterlimit:10;}
+	.st9{fill:none;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+	.st10{fill:url(#SVGID_1_);}
+	.st11{fill:none;stroke:#1C4EEB;stroke-width:6;stroke-miterlimit:10;}
+	.st12{fill:none;stroke:#1F50E9;stroke-width:6;stroke-miterlimit:10;}
+	.st13{fill:url(#SVGID_2_);}
+	.st14{fill:url(#SVGID_3_);}
+	.st15{fill:url(#SVGID_4_);}
+	.st16{fill:#1F50E9;stroke:#FFFFFF;stroke-width:4;stroke-miterlimit:10;}
+	.st17{fill:#1F50E9;}
+	.st18{fill:#1C4EEB;}
+	.st19{fill:url(#SVGID_5_);}
+	.st20{fill:url(#SVGID_6_);}
+	.st21{fill:none;stroke:#2D4CE8;stroke-width:6;stroke-miterlimit:10;}
+	.st22{fill:#A6B7FF;}
+	.st23{fill:none;stroke:#2D4CE8;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+	.st24{fill:#2D4DE8;}
+	.st25{fill:none;stroke:#A6B7FF;stroke-width:5;stroke-miterlimit:10;}
+	.st26{fill:#2D4CE8;}
+	.st27{fill:none;stroke:#A6B7FF;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+	.st28{fill:#A6B5FB;}
+	.st29{fill:none;stroke:#333333;stroke-width:4;stroke-miterlimit:10;}
+	.st30{fill:#333333;}
+	.st31{fill:#FFD01E;}
+	.st32{fill:url(#SVGID_7_);}
+	.st33{fill:#FF721C;}
+	.st34{fill:none;stroke:#FFFFFF;stroke-width:4;stroke-miterlimit:10;}
+	.st35{fill:#FFFFFF;}
+	.st36{fill:none;stroke:#12ACEF;stroke-width:8;stroke-linecap:round;stroke-miterlimit:10;}
+	.st37{fill:#12ACEF;}
+	.st38{fill:#FFFFFF;stroke:#4BB897;stroke-width:8;stroke-linecap:round;stroke-miterlimit:10;}
+	.st39{fill:none;stroke:#4BB897;stroke-width:8;stroke-linecap:round;stroke-miterlimit:10;}
+	.st40{fill:#4BB897;}
+	.st41{fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:10;}
+	.st42{fill:url(#SVGID_8_);}
+	.st43{fill:#FF6F1D;}
+	.st44{fill:url(#SVGID_9_);}
+	.st45{fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-miterlimit:10;}
+	.st46{fill:url(#SVGID_10_);}
+	.st47{filter:url(#Adobe_OpacityMaskFilter);}
+	.st48{mask:url(#SVGID_11_);}
+	.st49{fill:url(#SVGID_12_);}
+	.st50{opacity:0.84;fill:url(#SVGID_13_);}
+	.st51{fill:#006CEE;}
+	.st52{fill:#00CFFF;}
+	.st53{fill:#0145F3;}
+	.st54{filter:url(#Adobe_OpacityMaskFilter_1_);}
+	.st55{mask:url(#SVGID_14_);}
+	.st56{fill:url(#SVGID_15_);}
+	.st57{opacity:0.84;fill:url(#SVGID_16_);}
+	.st58{fill:#FF9F00;}
+	.st59{fill:#FFC501;}
+	.st60{fill:#FFEF02;}
+	.st61{fill:#FF9700;}
+	.st62{filter:url(#Adobe_OpacityMaskFilter_2_);}
+	.st63{mask:url(#SVGID_17_);}
+	.st64{fill:url(#SVGID_18_);}
+	.st65{opacity:0.84;fill:url(#SVGID_19_);}
+	.st66{fill:#FF396C;}
+	.st67{fill:#C1144D;}
+	.st68{fill:#FAD126;}
+	.st69{fill:#FADE28;}
+	.st70{fill:#FFC600;}
+	.st71{filter:url(#Adobe_OpacityMaskFilter_3_);}
+	.st72{mask:url(#SVGID_20_);}
+	.st73{fill:url(#SVGID_21_);}
+	.st74{opacity:0.84;fill:url(#SVGID_22_);}
+	.st75{fill:#4AED4A;}
+	.st76{fill:#DFFB07;}
+	.st77{fill:#2CDD2C;}
+	.st78{filter:url(#Adobe_OpacityMaskFilter_4_);}
+	.st79{mask:url(#SVGID_23_);}
+	.st80{fill:url(#SVGID_24_);}
+	.st81{fill:none;stroke:url(#SVGID_25_);stroke-miterlimit:10;}
+	.st82{fill:url(#SVGID_26_);}
+	.st83{fill:#8F84FF;}
+	.st84{fill:none;stroke:#504CE0;stroke-width:3;stroke-linecap:round;stroke-miterlimit:10;}
+	.st85{opacity:0.84;}
+	.st86{filter:url(#Adobe_OpacityMaskFilter_5_);}
+	.st87{mask:url(#SVGID_27_);}
+	.st88{fill:url(#SVGID_28_);}
+	.st89{opacity:0.84;fill:url(#SVGID_29_);}
+	.st90{fill:#07FCFF;}
+	.st91{fill:#006EF2;}
+</style>
+<g id="图层_1">
+</g>
+<g id="图层_2">
+	<g>
+		<path class="st30" d="M91.42,12.11H8.78c-3.79,0-6.89,3.1-6.89,6.89v61.98c0,3.79,3.1,6.89,6.89,6.89h82.65
+			c3.79,0,6.89-3.1,6.89-6.89V18.99C98.31,15.21,95.21,12.11,91.42,12.11L91.42,12.11z M87.98,18.99L55.26,48.95
+			c-2.75,2.41-7.23,2.41-10.33,0L12.22,18.99H87.98z M8.78,25.88l24.1,23.76L8.78,74.09V25.88z M12.22,80.98l26.17-25.14
+			c3.1,2.75,7.23,4.48,11.71,4.48c4.48,0,8.61-1.72,11.71-4.48l26.17,25.14H12.22z M91.42,74.09L67.32,49.64l24.11-23.76V74.09z
+			 M91.42,74.09"/>
+	</g>
+</g>
+</svg>

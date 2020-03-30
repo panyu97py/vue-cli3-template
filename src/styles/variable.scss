@@ -1,0 +1,27 @@
+$primary_color: #1890ff; //主题色
+$dominant_color: #12acef; //主色
+$success_color:#45be87;//成功色
+$warning_color: #ff8034; //警告色
+$safety_color: #45be87; //安全色
+$danger_color: #f56c6c; //危险色
+$auxiliary_color: #fdc352; //辅助色
+
+// 字体颜色变量
+$headline_text_color: #333333; //大标题字体颜色
+$value_text_color: #606266; //数值颜色
+$primary_text_color: #333333; //主要字体颜色
+$regular_text_color: #555555; //常规字体颜色
+$secondary_text_color: #666666; //次要字体颜色
+$subtitle_text_color:#9F9F9F; // 副标题颜色
+
+// app layout 变量
+$transition_time:0.4s;//页面展开或缩放时的动画事件
+$mainViewPaddingSize: 20px;//页面主体的padding
+$sidebar_collapse_width: 196px;//页面左侧导航展开时的宽度
+$sidebar_width: 60px;//页面左侧导航的宽
+$navBar_height: 50px;//页面头部导航的高
+$card_padding: 20px;//卡片padding
+$pageHead_height: 64px;//页面主体头部的高
+$layoutMain_background: #f2f2f2; //页面背景色
+$sidebar_background: #1c2b36; //侧边栏背景色
+$card_padding: 20px;//页面主体卡片的padding

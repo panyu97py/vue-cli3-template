@@ -1,13 +1,13 @@
 <template>
-  <div :class="isCollapse?'views_bot_layout_Navbar_collapse':'views_bot_layout_Navbar_notCollapse'"
-       class="views_bot_layout_Navbar">
-    <div class="views_bot_layout_Navbar_left">
+  <div :class="isCollapse?'layout_navBar_collapse':'layout_navBar_notCollapse'"
+       class="layout_navBar">
+    <div class="layout_navBar_left">
       <svg-icon icon-class="menu"
-                :class="isCollapse?'views_bot_layout_Navbar_collapse_icon':'views_bot_layout_Navbar_notCollapse_icon'"
+                :class="isCollapse?'layout_navBar_collapse_icon':'layout_navBar_notCollapse_icon'"
                 @click="$emit('changeCollapse')"/>
-      <breadcrumb class="views_bot_layout_Navbar_left_breadcrumb"/>
+      <breadcrumb class="layout_navBar_left_breadcrumb"/>
     </div>
-    <div class="views_bot_layout_Navbar_right">
+    <div class="layout_navBar_right">
       <userControl/>
       <loginOutButton @click="$emit('loginOut')"/>
     </div>

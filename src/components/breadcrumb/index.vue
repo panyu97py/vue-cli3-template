@@ -15,6 +15,6 @@ export default {
   computed: { ...mapGetters(['breadcrumbList']) }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "./index.scss";
 </style>

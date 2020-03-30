@@ -1,12 +1,12 @@
 <template>
-    <div :class="isCollapse?'layout_Sidebar_collapse':'layout_Sidebar'">
-        <div v-if="isCollapse" class="layout_Sidebar_head">
-            <div class="layout_Sidebar_head_logo">
+    <div :class="isCollapse?'layout_sideBar_collapse':'layout_sideBar'">
+        <div v-if="isCollapse" class="layout_sideBar_head">
+            <div class="layout_sideBar_head_logo">
                 LOGO
             </div>
-            <p class="layout_Sidebar_head_title">{{title}}</p>
+            <p class="layout_sideBar_head_title">{{title}}</p>
         </div>
-        <el-menu class="layout_Sidebar_menu"
+        <el-menu class="layout_sideBar_menu"
                  :show-timeout="200"
                  :default-active="$route.name"
                  :unique-opened="true"
@@ -16,7 +16,7 @@
                  background-color="#1c2b36"
                  text-color="#9BA4AB"
                  active-text-color="#12ACEF">
-            <SidebarItem v-for="(item,index) in router"
+            <sideBarItem v-for="(item,index) in router"
                          :key="index"
                          :item="item"
                          :base-path="item.path"/>
@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-    import SidebarItem from './item'
+    import sideBarItem from './item'
 
     export default {
         props: ['isCollapse'],
@@ -55,124 +55,7 @@
             }
         },
         components: {
-            SidebarItem
+            sideBarItem
         }
     }
 </script>
-<style lang="scss">
-    @mixin reset-element-ui-css {
-        .horizontal-collapse-transition {
-            transition: 0s width ease-in-out, 0s padding-left ease-in-out,
-            0s padding-right ease-in-out;
-        }
-    }
-    .layout_Sidebar {
-        position: relative;
-        &_head {
-            padding: 30px 0;
-            height: 120px;
-            &_title {
-                text-align: center;
-                font-size: 16px;
-                font-weight: bold;
-            }
-            &_logo {
-                font-size: 55px;
-                text-align: center;
-                img {
-                    height: 55px;
-                }
-            }
-        }
-        &_menu {
-            position: absolute !important;
-            top: 180px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            overflow: auto;
-            // margin-top: 40px;
-        }
-    }
-    .layout_Sidebar,
-    .layout_Sidebar_collapse {
-        color: white; //测试用
-        height: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 1001;
-        overflow: hidden;
-        transition: width $transition_time, padding-left $transition_time;
-        background: $sidebar_background;
-        @include reset-element-ui-css;
-        .el-menu {
-            border-right: none;
-            p {
-                display: inline-block;
-                margin: 0;
-                vertical-align: top;
-            }
-            &-item {
-                line-height: 56px;
-            }
-        }
-    }
-    .layout_Sidebar_collapse {
-        width: $sidebar_collapse_width;
-        .sidebar_icon {
-            $icon-size: 20px;
-            font-size: $icon-size;
-            margin: calc((56px - #{$icon_size}) / 2) 7px;
-        }
-    }
-    .layout_Sidebar {
-        $icon_size: 20px;
-        width: $sidebar_width !important;
-        .svg-icon {
-            width: $icon_size;
-            height: $icon_size;
-        }
-        .el-tooltip {
-            padding: 0 calc((#{$sidebar_width} - #{$icon_size}) / 2) !important;
-        }
-        .el-menu {
-            width: $sidebar_width !important;
-            &-item {
-                padding: 0 !important;
-            }
-        }
-        .el-submenu {
-            overflow: hidden;
-            width: $sidebar_width !important;
-            & > .el-submenu__title {
-                padding: 0 calc((#{$sidebar_width} - #{$icon_size}) / 2) !important;
-                .el-submenu__icon-arrow {
-                    display: none;
-                }
-                p {
-                    display: none;
-                }
-            }
-        }
-        .el-menu--collapse {
-            .el-submenu {
-                & > .el-submenu__title {
-                    & > span {
-                        height: 0;
-                        width: 0;
-                        overflow: hidden;
-                        visibility: hidden;
-                        display: inline-block;
-                    }
-                }
-            }
-        }
-    }
-    .sidebar-container .nest-menu .el-submenu > .el-submenu__title,
-    .sidebar-container .el-submenu .el-menu-item {
-        min-width: $sidebar_width !important;
-    }
-
-</style>

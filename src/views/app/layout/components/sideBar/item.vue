@@ -49,6 +49,7 @@ export default {
       return children.length
     },
     resolvePath (routePath) {
+      console.log(routePath)
       return routePath
     }
   }

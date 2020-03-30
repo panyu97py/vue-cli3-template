@@ -1,7 +1,7 @@
 <template>
   <el-table :data="data"
             stripe
-            ref="elimTable"
+            ref="table"
             class="components_table"
             :key="tableKey"
             :height="height"
@@ -92,8 +92,8 @@ export default {
     value: {
       deep: true,
       handler (value) {
-        if (this.value && this.selectValue !== this.value && this.hasSelection) {
-          this.selectValue = this.value
+        if (value && this.selectValue !== value && this.hasSelection) {
+          this.selectValue = value
           this.selection = []
           this.toggleRowSelection()
         }
@@ -101,7 +101,7 @@ export default {
     },
     data: {
       deep: true,
-      handler (data) {
+      handler () {
         if (this.hasSelection) {
           this.selection = []
           this.toggleRowSelection()
@@ -110,7 +110,7 @@ export default {
     },
     selectValueLength: {
       deep: true,
-      handler (data) {
+      handler () {
         if (this.hasSelection) {
           this.submitSelectValue()
         }
@@ -160,11 +160,11 @@ export default {
     toggleRowSelection () {
       let timmer = 0
       timmer = setInterval(() => {
-        if (this.data && this.$refs.elimTable) {
+        if (this.data && this.$refs.table) {
           let primaryKey = this.primaryKey || 'id'
           // 先清空表格中的被选项
           this.data.map(item => {
-            this.$refs.elimTable.toggleRowSelection(item, false)
+            this.$refs.table.toggleRowSelection(item, false)
           })
           // 勾选对应数据
           this.selectValue.map(selectItem => {
@@ -172,7 +172,7 @@ export default {
               return item[primaryKey] === selectItem[primaryKey]
             })
             if (selectRowIndex >= 0) {
-              this.$refs.elimTable.toggleRowSelection(this.data[selectRowIndex], true)
+              this.$refs.table.toggleRowSelection(this.data[selectRowIndex], true)
               // } else {
               //   console.log({ selectItem })
             }
@@ -213,6 +213,6 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "./index.scss";
 </style>

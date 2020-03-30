@@ -4,7 +4,7 @@
     0s padding-right ease-in-out;
   }
 }
-.layout_sideBar {
+&_sideBar {
   position: relative;
   &_head {
     padding: 30px 0;
@@ -32,8 +32,8 @@
     // margin-top: 40px;
   }
 }
-.layout_sideBar,
-.layout_sideBar_collapse {
+&_sideBar,
+&_sideBar_collapse {
   color: white; //测试用
   height: 100%;
   position: absolute;
@@ -57,7 +57,7 @@
     }
   }
 }
-.layout_sideBar_collapse {
+&_sideBar_collapse {
   width: $sidebar_collapse_width;
   .sidebar_icon {
     $icon-size: 20px;
@@ -65,7 +65,7 @@
     margin: calc((56px - #{$icon_size}) / 2) 7px;
   }
 }
-.layout_sideBar {
+&_sideBar {
   $icon_size: 20px;
   width: $sidebar_width !important;
   .svg-icon {

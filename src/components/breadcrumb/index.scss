@@ -1,5 +1,5 @@
-.components_breadcrumb{
-   .el-breadcrumb{
-     line-height: 50px;
-   }
+.components_breadcrumb {
+  /deep/ .el-breadcrumb {
+    line-height: 50px;
+  }
 }

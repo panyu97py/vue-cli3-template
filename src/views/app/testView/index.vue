@@ -1,5 +1,7 @@
 <template>
-    $END$
+    <div>
+        testView
+    </div>
 </template>
 
 <script>

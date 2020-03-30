@@ -1,11 +1,8 @@
-&_layout{
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  $transition_time:0.4s;
-  @import './Sidebar.scss';
-  @import './Navbar.scss';
-  @import './mainView.scss';
+.layout {
+  @include absolutePositionView;
+  /deep/ &{
+    @import './navBar.scss';
+    @import './mainView.scss';
+    @import './sideBar.scss';
+  }
 }

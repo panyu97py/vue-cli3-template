@@ -1,11 +1,13 @@
-$padding_size: 20px;
-&_Navbar {
+&_navBar {
+  position: relative;
+  z-index: 20;
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
 
   &_left {
     display: flex;
+    align-items: center;
 
     &_breadcrumb {
       margin-left: 15px;
@@ -20,56 +22,6 @@ $padding_size: 20px;
       display: flex;
       align-items: center;
       margin-right: 30px;
-    }
-
-    &_messageCenter {
-      &_head {
-        display: flex;
-        justify-content: space-between;
-        box-sizing: border-box;
-        padding: 10px;
-        border-bottom: solid 2px #EAEAEA;
-        //height: 60px;
-        //line-height: 60px;
-        &_title {
-          color: #333333;
-          font-size: 16px;
-        }
-
-        &_showAll {
-          color: #409EFF;
-          font-size: 14px;
-          cursor: default;
-        }
-      }
-      &_null{
-        padding: 10px;
-        color: #999999;
-        font-size: 14px;
-        text-align: center;
-      }
-      &_item:not(:last-child){
-        border-bottom: solid 2px #EAEAEA;
-      }
-      &_item {
-        padding: 10px;
-        &_head {
-          display: flex;
-          justify-content: space-between;
-          &_title {
-            color: #666666;
-          }
-
-          &_time {
-            color: #999999;
-          }
-        }
-
-        &_content {
-          color: #333333;
-        }
-
-      }
     }
 
     &_userHead {
@@ -88,7 +40,7 @@ $padding_size: 20px;
       cursor: pointer;
       padding: 0 5px;
       font-size: 12px;
-      color: $value_color;
+      color: $value_text_color;
     }
 
     &_loginOut:hover {
@@ -97,7 +49,7 @@ $padding_size: 20px;
 
     &_loginOut {
       cursor: pointer;
-      color: $value_color;
+      color: $value_text_color;
       display: flex;
       align-items: center;
 
@@ -113,7 +65,7 @@ $padding_size: 20px;
   }
 }
 
-&_Navbar::before {
+&_navBar::before {
   content: '';
   position: absolute;
   left: 0;
@@ -124,21 +76,19 @@ $padding_size: 20px;
   background: #cecece;
 }
 
-&_Navbar_notCollapse,
-&_Navbar_collapse {
-  position: relative;
-  height: $navbar_height;
+&_navBar_notCollapse,
+&_navBar_collapse {
+  height: $navBar_height;
   background: white;
   transition: width $transition_time, margin-left $transition_time;
 
   &_icon {
     $icon-size: 25px;
-    padding: calc((#{$navbar_height} - #{$icon-size}) / 2) 0;
     font-size: $icon-size;
   }
 }
 
-&_Navbar_notCollapse {
+&_navBar_notCollapse {
   margin-left: $sidebar_width;
 
   &_icon {
@@ -147,7 +97,7 @@ $padding_size: 20px;
   }
 }
 
-&_Navbar_collapse {
+&_navBar_collapse {
   margin-left: $sidebar_collapse_width;
 
   &_icon {

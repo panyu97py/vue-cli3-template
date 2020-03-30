@@ -1,13 +1,12 @@
 <template>
     <el-dropdown trigger="click"
                  @command="handleCommand">
-        <div class="views_bot_layout_Navbar_right_user">
-            <div class="views_bot_layout_Navbar_right_userHead" style="overflow: hidden">
-                <svg-icon icon-class="bot-icon_ren" style="line-height: 26px"/>
-                <!--        <img :src="userInfo.headUrl" v-else style="width: 100%">-->
+        <div class="layout_navBar_right_user">
+            <div class="layout_navBar_right_userHead" style="overflow: hidden">
+                <svg-icon icon-class="ren" style="line-height: 26px"/>
             </div>
-            <div class="views_bot_layout_Navbar_right_userName">
-                <!--        {{userInfo.nickname||'未知'}}-->
+            <div class="layout_navBar_right_userName">
+                {{`${(userInfo&&userInfo.nickname)||'未知'}`}}
                 <i class="el-icon-caret-bottom"/>
             </div>
         </div>
@@ -18,10 +17,10 @@
 </template>
 
 <script>
-    // import {mapGetters} from 'vuex'
+    import {mapGetters} from 'vuex'
     export default {
         computed: {
-            // ...mapGetters(['userInfo'])
+            ...mapGetters(['userInfo'])
         },
         methods: {
             handleCommand(command) {

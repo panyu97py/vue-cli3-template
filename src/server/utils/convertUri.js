@@ -1,7 +1,6 @@
 import apiConfig from '@/server/config'
 const api_env = process.env.API_ENV
 const api = apiConfig[api_env]
-console.log(`API_ENV:${process.env.API_ENV}`)
 /**
  * uri转url
  */

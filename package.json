@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "cross-env API_ENV=dev vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve:dev": "cross-env API_ENV=dev vue-cli-service serve",
+    "serve:alpha": "cross-env API_ENV=alpha vue-cli-service serve",
+    "serve:prod": "cross-env API_ENV=prod vue-cli-service serve",
+    "build:dev": "cross-env API_ENV=dev vue-cli-service build",
+    "build:alpha": "cross-env API_ENV=alpha vue-cli-service build",
+    "build:prod": "cross-env API_ENV=prod vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

@@ -12,7 +12,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$utils = utils
 Vue.prototype.$api = api
-console.log(`API_ENV:${process.env.API_ENV}`)
+console.log(process.env)
 
 
 new Vue({

@@ -7,7 +7,7 @@ import api from '@/server/api'
 import ElementUI from 'element-ui';
 import '@/components'
 import '@/assets/icons'
-import 'element-ui/lib/theme-chalk/index.css';
+import '@/styles/element-ui-theme/index.css'
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$utils = utils

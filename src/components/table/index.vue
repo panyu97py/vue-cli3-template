@@ -164,8 +164,7 @@
              * 操作
              */
             async handlerOperate(key, row, item) {
-                const SensitiveOperationKeys = ['delete', 'cancel', 'release']
-                const isSensitiveOperation = SensitiveOperationKeys.indexOf(key) >= 0
+                const isSensitiveOperation = this.sensitiveOperationKeys.indexOf(key) >= 0
                 if (isSensitiveOperation) {
                     await this.handlerSensitiveOperation(item, key)
                 }

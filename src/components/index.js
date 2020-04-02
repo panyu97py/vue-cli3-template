@@ -5,5 +5,5 @@ import checkboxGroup from './checkboxGroup'
 
 
 Vue.component('svg-icon', svgIcon)
-Vue.component('sas-table', table)
-Vue.component('sas-checkbox-group', checkboxGroup)
+Vue.component('ly-table', table)
+Vue.component('ly-checkbox-group', checkboxGroup)

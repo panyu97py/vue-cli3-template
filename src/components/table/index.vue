@@ -104,14 +104,12 @@
                 deep: true,
                 handler(newValue, oldValue) {
                     const {primaryKey} = this
-                    console.log(newValue, oldValue)
                     // 新增数据选中
                     newValue.filter(newValueItem => (
                         oldValue.findIndex(oldValueItem => (
                             oldValueItem[primaryKey] === newValueItem[primaryKey]
                         )) < 0
                     )).forEach(item => {
-                        console.log('+',item)
                         this.handlerToggleRowSelection(item, true)
                     })
                     // 取消选中减少的数据
@@ -120,7 +118,6 @@
                             oldValueItem[primaryKey] === newValueItem[primaryKey]
                         )) < 0
                     )).forEach(item => {
-                        console.log('-',item)
                         this.handlerToggleRowSelection(item, false)
                     })
                 }

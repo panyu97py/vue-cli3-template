@@ -12,6 +12,12 @@ export default {
             name: 'collegeManageList',
             meta: {title: '学院列表'},
             component: () => import('@/views/app/collegeManage/list')
+        },
+        {
+            path: 'applicationReview',
+            name: 'collegeApplicationReview',
+            meta: {title: '申请审核'},
+            component: () => import('@/views/app/collegeManage/applicationReview')
         }
     ]
 }

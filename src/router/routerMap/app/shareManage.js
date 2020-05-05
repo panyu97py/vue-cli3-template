@@ -10,7 +10,7 @@ export default {
         {
             path: 'list',
             name: 'shareManageList',
-            meta: {title: '学校列表'},
+            meta: {title: '共享列表'},
             component: () => import('@/views/app/shareManage/list')
         }
     ]

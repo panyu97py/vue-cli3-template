@@ -1,3 +1,9 @@
+import my from "./my";
+import schoolManage from "./schoolManage";
+import collegeManage from "./collegeManage";
+import notifyManage from "./notifyManage";
+import shareManage from "./shareManage";
+
 /**
  * app 模块
  */
@@ -7,12 +13,11 @@ export default [
         path: '/app',
         component: () => import('@/views/app/layout'),
         children: [
-            {
-                name: 'testView',
-                path: 'testView',
-                meta: {title: '测试页面', authority: true},
-                component: () => import('@/views/app/testView')
-            }
+            my,
+            schoolManage,
+            collegeManage,
+            notifyManage,
+            shareManage
         ]
     }
 ]

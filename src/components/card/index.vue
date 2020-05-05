@@ -3,10 +3,10 @@
         <div class="card_view_head">
             <div class="card_view_head_left">
                 <span v-if="title" class="card_view_title">{{title}}</span>
-                <slot v-else name="head_left"/>
+                <slot v-else name="headLeft"/>
             </div>
             <div class="card_view_head_right">
-                <slot name="head_right"/>
+                <slot name="headRight"/>
             </div>
         </div>
         <div class="card_view_body">
@@ -30,16 +30,16 @@
         border-radius: 5px;
         background: #fff;
 
+        &_title {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+        }
+
         &_head {
             display: flex;
             justify-content: space-between;
-
-            &_title{
-                font-size: 18px;
-                font-weight: bold;
-                color: black;
-            }
-
+            line-height: 20px;
         }
 
     }

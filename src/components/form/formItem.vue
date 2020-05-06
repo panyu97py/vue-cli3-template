@@ -5,7 +5,7 @@
             <el-row>
                 <el-col :span="formItemBodySize">
                     <el-input :value="value"
-                              :placeholder="formItemPlaceholder||`请输入${label}`"
+                              :placeholder="formItemPlaceholder"
                               :disabled="formItemDisable"
                               :show-password="getOption('showPassword')"
                               :maxlength="getOption('maxlength')"
@@ -13,6 +13,7 @@
                               :type="formItemType"
                               @change="handlerChange"
                               @input="handlerInput"
+                              @focus="handlerFocus"
                               v-if="formItemType==='input'||formItemType==='textarea'">
                     </el-input>
                     <el-select v-else-if="formItemType==='select'&&formItemOptions"
@@ -20,7 +21,7 @@
                                :disabled="formItemDisable"
                                @input="handlerInput"
                                @change="handlerChange"
-                               :placeholder="formItemPlaceholder||`请选择${label}`">
+                               :placeholder="formItemPlaceholder">
                         <el-option v-for="(item,index) in formItemOptions"
                                    :key="`selectItem_${index}`"
                                    :label="item[formItemLabelKey]"
@@ -33,6 +34,10 @@
 </template>
 
 <script>
+    const defaultPlaceholderPrefix = {
+        input: '请输入',
+        select: '请选择'
+    }
     export default {
         props: {
             value: [Array, String, Object],
@@ -87,7 +92,7 @@
                 return this.getOption('bodySize')
             },
             formItemPlaceholder() {
-                return this.getOption('placeholder')
+                return this.getOption('placeholder') ||`${defaultPlaceholderPrefix[this.formItemType]}${this.getOption('label')}`
             }
         },
         methods: {
@@ -113,6 +118,12 @@
              */
             handlerChange(value) {
                 this.$emit('change', this.getSubmitValue(value))
+            },
+            /**
+             * input 聚焦事件
+             */
+            handlerFocus(){
+                this.$emit('focus')
             },
             /**
              * 获取需要提交的数据

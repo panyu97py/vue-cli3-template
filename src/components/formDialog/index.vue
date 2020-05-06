@@ -1,7 +1,10 @@
 <template>
-    <sas-dialog ref="formDialog" :title="displayTitle" @save="handlerSave" @cancel="handlerCancel">
+    <sas-dialog ref="formDialog" :title="displayTitle" @save="handlerSave" @cancel="handlerCancel" :width="width">
         <sas-form-view :model="data" :rules="rules">
-            <sas-form-item v-for="(item,index) in formItemList" :key="index" :options="item" v-model="data[item.key]"/>
+            <sas-form-item v-for="(item,index) in formItemList" :key="index" :options="item" :value="data[item.key]"
+                           :size="formItemSize" :body-size="formItemBodySize"
+                           @input="handlerInput($event,item.key)"
+                           @focus="handlerFocus(item.key)"/>
         </sas-form-view>
     </sas-dialog>
 </template>
@@ -9,6 +12,18 @@
 <script>
     export default {
         props: {
+            // 表单 item body 大小
+            formItemBodySize: {
+                type: Number,
+                default: () => 16
+            },
+            // 表单 item 大小
+            formItemSize: {
+                type: Number,
+                default: () => 24
+            },
+            // 弹窗宽度
+            width: String,
             // 标题（优先级最高）
             title: String,
             // 编辑状态时的标题
@@ -47,9 +62,7 @@
              */
             open(data) {
                 this.isEdit = !!data
-                if (this.isEdit) {
-                    this.data = data
-                }
+                this.data = data ? data : {}
                 this.$refs.formDialog.open()
             },
             /**
@@ -71,6 +84,19 @@
             handlerCancel() {
                 const {close} = this
                 this.$emit('cancel', {close})
+            },
+            /**
+             * 输入事件
+             */
+            handlerInput(value, key) {
+                this.$set(this.data, key, value)
+            },
+            /**
+             * 聚焦事件
+             * @param key
+             */
+            handlerFocus(key) {
+                this.$emit('focus',key)
             }
         }
     }

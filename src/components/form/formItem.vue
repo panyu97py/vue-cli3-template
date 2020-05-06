@@ -35,6 +35,7 @@
 <script>
     export default {
         props: {
+            value: [Array, String, Object],
             label: String,
             prop: String,
             placeholder: String,
@@ -63,7 +64,7 @@
             formItemSelectAll() {
                 return this.getOption('selectAll', false)
             },
-            formItemDisable(){
+            formItemDisable() {
                 return this.getOption('disabled')
             },
             formItemType() {
@@ -85,7 +86,7 @@
             formItemBodySize() {
                 return this.getOption('bodySize')
             },
-            formItemPlaceholder(){
+            formItemPlaceholder() {
                 return this.getOption('placeholder')
             }
         },

@@ -40,6 +40,7 @@
             display: flex;
             justify-content: space-between;
             line-height: 20px;
+            margin-bottom: 10px;
         }
 
     }

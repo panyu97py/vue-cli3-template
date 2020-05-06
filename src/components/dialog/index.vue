@@ -28,10 +28,10 @@
     <template slot="footer"
               v-if="!hiddenFooter">
       <template v-if="!$slots.footer">
-        <elim-button :text="cancelText"
+        <sas-button :text="cancelText"
                      type="white"
                      @click="cancel"/>
-        <elim-button type="primary"
+        <sas-button type="primary"
                      :text="confirmText"
                      @click="save"/>
         <slot name="footerButtonGroup"/>

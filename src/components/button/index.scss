@@ -1,0 +1,129 @@
+// .components_button_disable {
+//   cursor: not-allowed !important;
+//   &_text {
+//     color: #afb3bb !important;
+//   }
+//   &_icon {
+//     color: #afb3bb !important;
+//   }
+// }
+.components_button {
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 4px;
+  outline: none;
+  display: inline-block;
+  cursor: pointer;
+  p{
+    margin: 0;
+  }
+  &_disable {
+    cursor: not-allowed !important;
+    &_primary {
+      color: white;
+      border: solid #2697ff 1px;
+      background: #2697ff;
+    }
+    &_danger {
+      color: white;
+      border: solid #ff636f 1px;
+      background: #ff636f;
+    }
+    &_success {
+      color: white;
+      border: solid #4bc58e 1px;
+      background: #4bc58e;
+    }
+    &_warning{
+      color: white;
+      border: solid #febd59 1px;
+      background: #febd59;
+    }
+  }
+  //@include noSelect;
+  @mixin button($defaultColor, $hoverColor, $activeColor) {
+    background: $defaultColor;
+    border: solid $defaultColor 1px;
+    color: white;
+    &:hover {
+      background: $defaultColor;
+      border: solid $defaultColor 1px;
+    }
+    &:active {
+      background: $activeColor;
+      border: solid $activeColor 1px;
+    }
+  }
+  &_icon {
+    font-size: 20px;
+  }
+  &_text {
+    display: inline-block;
+    vertical-align: top;
+  }
+  &_blue {
+    background: white;
+    border: #1890ff solid 1px;
+    color: #1890ff;
+    &:hover {
+      opacity: 0.9;
+    }
+    &:active {
+      border: #1386f1 solid 1px;
+      color: #1386f1;
+    }
+  }
+  &_default {
+    background: white;
+    border: white solid 1px;
+    color: #333333;
+    // &:hover {
+    //   opacity: 0.9;
+    // }
+    // &:active {
+    //   border: #1386f1 solid 1px;
+    //   color: #1386f1;
+    // }
+  }
+  &_white {
+    background: white;
+    border: #DCDFE6 solid 1px;
+    color: #333333;
+     &:hover {
+       opacity: 0.8;
+     }
+     &:active {
+       opacity: 1;
+       //border: #1386f1 solid 1px;
+       //color: #1386f1;
+     }
+  }
+  &_primary {
+    @include button(
+      $defaultColor: #1890ff,
+      $hoverColor: #2697ff,
+      $activeColor: #1386f1
+    );
+  }
+  &_success {
+    @include button(
+      $defaultColor: #45be87,
+      $hoverColor: #4bc58e,
+      $activeColor: #37b97e
+    );
+  }
+  &_warning {
+    @include button(
+      $defaultColor: #ffb849,
+      $hoverColor: #febd59,
+      $activeColor: #f5af40
+    );
+  }
+  &_danger {
+    @include button(
+      $defaultColor: #ff4e5c,
+      $hoverColor: #ff636f,
+      $activeColor: #f64856
+    );
+  }
+}

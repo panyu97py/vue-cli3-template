@@ -1,6 +1,7 @@
 import axios from 'axios'
 import requestOauth from "@/server/utils/requestOauth";
 import convertUri from "@/server/utils/convertUri";
+import {Notification} from "element-ui";
 
 /**
  * 创建 axios 实例
@@ -39,7 +40,7 @@ service.interceptors.response.use(
      * @return {any}
      */
     response => {
-        return response.data
+        return response.data.data
     },
     /**
      * 响应出错的拦截
@@ -47,6 +48,11 @@ service.interceptors.response.use(
      * @return {Promise<never>}
      */
     error => {
+        Notification({
+            type:'error',
+            title:'错误',
+            message:(error.response.data.data && error.response.data.data.message)||'未知错误'
+        })
         return Promise.reject(error)
     }
 )

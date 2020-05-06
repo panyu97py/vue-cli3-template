@@ -1,3 +1,4 @@
+import $router from '@/router'
 export default {
     state: {
         userInfo: null
@@ -6,5 +7,9 @@ export default {
         userInfo: state => state.userInfo
     },
     mutations: {},
-    actions: {}
+    actions: {
+        loginOut() {
+            $router.push({name:'user'})
+        }
+    }
 }

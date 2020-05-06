@@ -1,6 +1,6 @@
-import uaa from './uaa'
-import manage from './manage'
+import schoolController from './schoolController'
+import collegeController from './collegeController'
 export default {
-    ...uaa,
-    ...manage
+    ...schoolController,
+    ...collegeController
 }

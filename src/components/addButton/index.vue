@@ -22,6 +22,7 @@
 <style lang="scss" scoped>
     .addButton {
         display: flex;
+        cursor: pointer;
 
         > p {
             margin: 0 5px;

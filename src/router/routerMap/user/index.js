@@ -6,6 +6,20 @@ export default [
     {
         name:'user',
         path:'/user',
-        component:()=>import('@/views/user/layout')
+        component:()=>import('@/views/user/layout'),
+        redirect: {name: 'login'},
+        children:[
+            {
+                path:'login',
+                name:'login',
+                component:()=>import('@/views/user/login')
+            },
+            {
+                path:'register',
+                name:'register',
+                component:()=>import('@/views/user/register')
+            }
+
+        ]
     }
 ]

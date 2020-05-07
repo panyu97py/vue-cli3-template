@@ -12,6 +12,7 @@ export default [
         name: 'app',
         path: '/app',
         component: () => import('@/views/app/layout'),
+        redirect: {name: 'my'},
         children: [
             my,
             schoolManage,

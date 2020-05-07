@@ -1,5 +1,5 @@
 <template>
-    <sas-card title="学院申请管理">
+    <sas-card title="学院加入申请管理">
         <sas-table :column-list="columnList" :data="tableData">
             <template v-slot:operate="{row:{id}}">
                 <el-button type="text" @click="handlerProcessApply(id,true)">同意</el-button>

@@ -40,7 +40,7 @@ service.interceptors.response.use(
      * @return {any}
      */
     response => {
-        return response.data.data
+        return response.data?.data||response.data
     },
     /**
      * 响应出错的拦截

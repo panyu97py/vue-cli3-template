@@ -19,6 +19,7 @@
                     <el-select v-else-if="formItemType==='select'&&formItemOptions"
                                :value="formItemSelectAll&&value?value[formItemValueKey]:value"
                                :disabled="formItemDisable"
+                               filterable
                                @input="handlerInput"
                                @change="handlerChange"
                                :placeholder="formItemPlaceholder">
@@ -51,11 +52,7 @@
             maxlength: Number,
             options: [Array, Object],
             selectAll: Boolean,
-            type: {
-                type: String,
-                default: () => 'input'
-
-            },
+            type: String,
             bodySize: {
                 type: Number,
                 default: () => 8
@@ -73,7 +70,7 @@
                 return this.getOption('disabled')
             },
             formItemType() {
-                return this.getOption('type')
+                return this.getOption('type','input')
             },
             formItemValueKey() {
                 return this.getOption('valueKey', 'value')

@@ -7,7 +7,7 @@ import request from '@/server/utils/request'
  */
 export default (formData) => {
     return request({
-        url: '/:server/school/create',
+        url: '/:server/school/update',
         method: 'put',
         data: formData
     })

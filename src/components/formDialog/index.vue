@@ -2,7 +2,7 @@
     <sas-dialog ref="formDialog" :title="displayTitle" @save="handlerSave" @cancel="handlerCancel" :width="width">
         <sas-form-view :model="data" :rules="rules">
             <sas-form-item v-for="(item,index) in formItemList" :key="index" :options="item" :value="data[item.key]"
-                           :size="formItemSize" :body-size="formItemBodySize"
+                           :size="formItemSize" :body-size="formItemBodySize" :select-all="formItemSelectAll"
                            @input="handlerInput($event,item.key)"
                            @focus="handlerFocus(item.key)"/>
         </sas-form-view>
@@ -15,12 +15,17 @@
             // 表单 item body 大小
             formItemBodySize: {
                 type: Number,
-                default: () => 16
+                default: () => 24
             },
             // 表单 item 大小
             formItemSize: {
                 type: Number,
                 default: () => 24
+            },
+            // 是否选择全部
+            formItemSelectAll:{
+                type: Boolean,
+                default: () => false
             },
             // 弹窗宽度
             width: String,

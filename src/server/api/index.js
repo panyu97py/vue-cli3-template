@@ -1,8 +1,10 @@
 import schoolController from './schoolController'
 import collegeController from './collegeController'
 import userController from "./userController";
+import applyController from "./applyController";
 export default {
     ...schoolController,
     ...collegeController,
-    ...userController
+    ...userController,
+    ...applyController
 }

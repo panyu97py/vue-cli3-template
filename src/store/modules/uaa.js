@@ -28,10 +28,14 @@ export default {
          * @param password
          * @returns {Promise<*>}
          */
-        async login({commit, dispatch}, {username, password} = {}) {
+        async login({commit, dispatch}, {username, password, access_token} = {}) {
+            if (access_token) {
+
+            }
             const res = await $api.oauthToken({username, password})
             commit('SET_OAUTH_INFO', res)
             await dispatch('getMyUserInfo')
+            localStorage.setItem('oauthInfo', res)
             return res
         },
         /**

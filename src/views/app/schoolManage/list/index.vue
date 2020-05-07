@@ -109,7 +109,7 @@
              * @param close
              */
             async handlerSave({isEdit, data, close}) {
-                if(!data.manager.id){
+                if(!data.manager?.id){
                     data.manager=null
                 }
                 await this.$api[isEdit ? 'updateSchool' : 'createSchool'](data)

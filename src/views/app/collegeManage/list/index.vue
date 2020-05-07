@@ -3,7 +3,8 @@
         <template v-slot:headRight>
             <sas-add-button text="添加" @click="handlerAddCollege"/>
         </template>
-        <sas-table :column-list="columnList" :data="tableData" @delete="handlerDeleteCollege" @edit="handlerEdit"/>
+        <sas-table :column-list="columnList" :data="tableData" @delete="handlerDeleteCollege" @edit="handlerEdit"
+                   @rowClick="toMemberManager"/>
         <sas-form-dialog width="500px" ref="collegeDetail" edit-title="编辑学院" create-title="创建学院"
                          :form-item-list="formItemList"
                          @cancel="handlerCancel" @save="handlerSave"/>
@@ -140,6 +141,13 @@
                     type: 'success'
                 })
                 close()
+            },
+            /**
+             * 前往成员管理页面
+             * @param id
+             */
+            toMemberManager({id}) {
+                this.$router.push({name: 'collegeMemberManage', query: {id}})
             }
         },
         mounted() {

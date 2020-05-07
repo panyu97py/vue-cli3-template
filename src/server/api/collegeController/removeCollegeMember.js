@@ -9,6 +9,6 @@ import request from '@/server/utils/request'
 export default ({collegeId,userId}) => {
     return request({
         url: `/:server/college/removeMember/${collegeId}/${userId}`,
-        method: 'path'
+        method: 'patch'
     })
 }

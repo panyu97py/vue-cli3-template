@@ -4,7 +4,7 @@
             <sas-button :key="key"
                        v-if="operateList[key]&&!judgeHidden(key)"
                        :style="{fontWeight:'bold',margin:'5px 10px 5px 0'}"
-                       @click="handlerClick(key)"
+                       @click.stop="handlerClick(key)"
                        :icon="operateList[key].icon"
                        :text="operateList[key].text"
                        :disable="judgeDisable(key)"

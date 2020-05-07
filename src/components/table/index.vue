@@ -39,7 +39,7 @@
                        :width="item.width"
                        :label="item.label"
                        :key="index">
-        <template slot-scope="scope">
+        <template v-slot:default="scope">
           <slot :name="item.key"
                 :row="scope.row" />
         </template>

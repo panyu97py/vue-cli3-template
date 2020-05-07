@@ -18,6 +18,14 @@ export default {
             name: 'collegeApplicationReview',
             meta: {title: '申请审核'},
             component: () => import('@/views/app/collegeManage/applicationReview')
+        },
+        {
+            path: 'memberManage',
+            name: 'collegeMemberManage',
+            meta: {title: '成员管理'},
+            hidden: true,
+            component: () => import('@/views/app/collegeManage/memberManage'),
+            props: route => route.query
         }
     ]
 }

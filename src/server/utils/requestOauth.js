@@ -12,5 +12,5 @@ export default () => {
     // if (needOauth && token) {
     //     return 'Bearer ' + token
     // }
-    return 'Bearer def0f505-7c0b-4746-bcaf-050cdc5b2587'
+    return 'Bearer 431b2d83-9fcd-4f98-8c80-a64ff1ad5371'
 }

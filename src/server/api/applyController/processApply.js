@@ -9,6 +9,6 @@ import request from '@/server/utils/request'
 export default ({applyId, auditStatus}) => {
     return request({
         url: `/:server/apply/process/${applyId}/${auditStatus}`,
-        method: 'path',
+        method: 'patch',
     })
 }

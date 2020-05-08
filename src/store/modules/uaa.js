@@ -4,7 +4,8 @@ import $api from '@/server/api'
 export default {
     state: {
         userInfo: null,
-        oauthInfo: {}
+        oauthInfo: {},
+        isLogin: false
     },
     getters: {
         userInfo: state => state.userInfo,
@@ -16,7 +17,9 @@ export default {
         },
         SET_USER_INFO(state, userInfo) {
             state.userInfo = userInfo
-
+        },
+        SET_LOGIN_STATUS(state, status) {
+            state.isLogin = status
         }
     },
     actions: {
@@ -30,12 +33,20 @@ export default {
          */
         async login({commit, dispatch}, {username, password, access_token} = {}) {
             if (access_token) {
-
+                await new Promise((resolve, reject) => {
+                    $api.checkToken(access_token).then(() => {
+                        resolve()
+                    }).catch(() => {
+                        dispatch('loginOut')
+                        reject()
+                    })
+                })
             }
             const res = await $api.oauthToken({username, password})
             commit('SET_OAUTH_INFO', res)
             await dispatch('getMyUserInfo')
-            localStorage.setItem('oauthInfo', res)
+            commit('SET_LOGIN_STATUS', true)
+            localStorage.setItem('oauthInfo', JSON.stringify(res))
             return res
         },
         /**
@@ -54,6 +65,8 @@ export default {
         loginOut({commit}) {
             commit('SET_OAUTH_INFO', {})
             commit('SET_USER_INFO', {})
+            commit('SET_LOGIN_STATUS', false)
+            localStorage.removeItem('oauthInfo')
             $router.push({name: 'user'})
         }
     }

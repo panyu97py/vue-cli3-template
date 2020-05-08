@@ -4,9 +4,12 @@ import request from '@/server/utils/request'
  * 获取全部学院
  * @returns {*}
  */
-export default () => {
+export default (schoolId) => {
     return request({
         url: '/:server/college/findAll',
-        method: 'get'
+        method: 'get',
+        params: {
+            schoolId
+        }
     })
 }

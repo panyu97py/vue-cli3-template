@@ -2,8 +2,8 @@
     <sas-card title="学院加入申请管理">
         <sas-table :column-list="columnList" :data="tableData">
             <template v-slot:operate="{row:{id}}">
-                <el-button type="text" @click="handlerProcessApply(id,true)">同意</el-button>
-                <el-button type="text" @click="handlerProcessApply(id,false)">拒绝</el-button>
+                <el-button type="text" @click="handlerProcessApply(id,'AGREE')">同意</el-button>
+                <el-button type="text" @click="handlerProcessApply(id,'REFUSE')">拒绝</el-button>
             </template>
         </sas-table>
     </sas-card>
@@ -51,6 +51,7 @@
              */
             async handlerProcessApply(applyId, auditStatus) {
                 await this.$api.processApply({applyId, auditStatus})
+                await this.getApplyList()
                 this.$notify({
                     title: '成功',
                     message: '处理成功',

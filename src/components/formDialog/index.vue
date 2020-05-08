@@ -3,6 +3,7 @@
         <sas-form-view :model="data" :rules="rules" :label-width="labelWidth">
             <sas-form-item v-for="(item,index) in formItemList" :key="index" :options="item" :value="data[item.key]"
                            :size="formItemSize" :body-size="formItemBodySize" :select-all="formItemSelectAll"
+                           @change="handlerChange($event,item.key)"
                            @input="handlerInput($event,item.key)"
                            @focus="handlerFocus(item.key)"/>
         </sas-form-view>
@@ -24,7 +25,7 @@
                 default: () => 24
             },
             // 是否选择全部
-            formItemSelectAll:{
+            formItemSelectAll: {
                 type: Boolean,
                 default: () => false
             },
@@ -37,7 +38,7 @@
             // 创建状态时的标题
             createTitle: String,
             // 标签长度
-            labelWidth:{
+            labelWidth: {
                 type: String,
                 default: () => '100px'
             },
@@ -100,7 +101,7 @@
              * 输入事件
              */
             handlerInput(value, key) {
-                console.log({value,key})
+                console.log({value, key})
                 this.$set(this.data, key, value)
             },
             /**
@@ -108,7 +109,13 @@
              * @param key
              */
             handlerFocus(key) {
-                this.$emit('focus',key)
+                this.$emit('focus', key)
+            },
+            /**
+             * 改变事件
+             */
+            handlerChange(value, key) {
+                this.$emit('change', value, key)
             }
         }
     }

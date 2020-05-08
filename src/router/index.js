@@ -18,7 +18,7 @@ const userRouterName = ['login', 'register', 'user']
  * 路由守卫
  */
 router.beforeEach(async (to, from, next) => {
-    const oauthInfoFromLocal = JSON.parse(localStorage.getItem('oauthInfo'))
+    const oauthInfoFromLocal = localStorage.getItem('oauthInfo') ? JSON.parse(localStorage.getItem('oauthInfo')) : null
     if (!$store.getters.isLogin && oauthInfoFromLocal) {
         await $store.dispatch('login', oauthInfoFromLocal)
         if (userRouterName.indexOf(to.name) >= 0) {
@@ -26,15 +26,15 @@ router.beforeEach(async (to, from, next) => {
         } else {
             next()
         }
-    }else if($store.getters.isLogin||userRouterName.indexOf(to.name) >= 0){
+    } else if ($store.getters.isLogin || userRouterName.indexOf(to.name) >= 0) {
         next()
-    }
-    else{
+    } else {
         Notification({
-            title:'消息',
-            type:'warning',
-            message:'请先登录'
+            title: '消息',
+            type: 'warning',
+            message: '请先登录'
         })
+        next({name: 'user'})
     }
 })
 

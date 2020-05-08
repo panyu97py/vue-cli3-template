@@ -1,6 +1,5 @@
 <template>
-    <el-dropdown trigger="click"
-                 @command="handleCommand">
+    <el-dropdown trigger="click">
         <div class="layout_navBar_right_user">
             <div class="layout_navBar_right_userHead" style="overflow: hidden">
                 <svg-icon icon-class="ren" style="line-height: 26px"/>

@@ -9,7 +9,8 @@ export default {
     },
     getters: {
         userInfo: state => state.userInfo,
-        token: state => state.oauthInfo?.access_token
+        token: state => state.oauthInfo?.access_token,
+        isLogin: state => state.isLogin
     },
     mutations: {
         SET_OAUTH_INFO(state, oauthInfo) {
@@ -41,13 +42,14 @@ export default {
                         reject()
                     })
                 })
+                commit('SET_OAUTH_INFO', {access_token})
+            } else {
+                const res = await $api.oauthToken({username, password})
+                commit('SET_OAUTH_INFO', res)
+                localStorage.setItem('oauthInfo', JSON.stringify(res))
             }
-            const res = await $api.oauthToken({username, password})
-            commit('SET_OAUTH_INFO', res)
             await dispatch('getMyUserInfo')
             commit('SET_LOGIN_STATUS', true)
-            localStorage.setItem('oauthInfo', JSON.stringify(res))
-            return res
         },
         /**
          * 获取用户信息

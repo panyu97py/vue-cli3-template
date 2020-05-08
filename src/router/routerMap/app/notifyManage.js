@@ -10,7 +10,7 @@ export default {
         {
             path: 'list',
             name: 'notifyManageList',
-            meta: {title: '通知列表'},
+            meta: {title: '通知管理'},
             component: () => import('@/views/app/notifyManage/list')
         }
     ]

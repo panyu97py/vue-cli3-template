@@ -37,6 +37,7 @@
 <script>
     const defaultPlaceholderPrefix = {
         input: '请输入',
+        textarea:'请输入',
         select: '请选择'
     }
     export default {

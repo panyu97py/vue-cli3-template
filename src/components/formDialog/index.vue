@@ -1,11 +1,12 @@
 <template>
     <sas-dialog ref="formDialog" :title="displayTitle" @save="handlerSave" @cancel="handlerCancel" :width="width">
-        <sas-form-view :model="data" :rules="rules">
+        <sas-form-view :model="data" :rules="rules" :label-width="labelWidth">
             <sas-form-item v-for="(item,index) in formItemList" :key="index" :options="item" :value="data[item.key]"
                            :size="formItemSize" :body-size="formItemBodySize" :select-all="formItemSelectAll"
                            @input="handlerInput($event,item.key)"
                            @focus="handlerFocus(item.key)"/>
         </sas-form-view>
+        <slot/>
     </sas-dialog>
 </template>
 
@@ -35,6 +36,11 @@
             editTitle: String,
             // 创建状态时的标题
             createTitle: String,
+            // 标签长度
+            labelWidth:{
+                type: String,
+                default: () => '100px'
+            },
             // 表单数据校验规则
             rules: Object,
             // 表单配置项目
@@ -94,6 +100,7 @@
              * 输入事件
              */
             handlerInput(value, key) {
+                console.log({value,key})
                 this.$set(this.data, key, value)
             },
             /**

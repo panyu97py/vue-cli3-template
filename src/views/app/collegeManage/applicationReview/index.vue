@@ -1,9 +1,9 @@
 <template>
     <sas-card title="学院加入申请管理">
         <sas-table :column-list="columnList" :data="tableData">
-            <template v-slot:operate="{row:{id}}">
-                <el-button type="text" @click="handlerProcessApply(id,'AGREE')">同意</el-button>
-                <el-button type="text" @click="handlerProcessApply(id,'REFUSE')">拒绝</el-button>
+            <template v-slot:operate="{row:{id,auditStatus}}">
+                <el-button type="text" @click="handlerProcessApply(id,'AGREE')" :disabled="auditStatus!='UNTREATED'">同意</el-button>
+                <el-button type="text" @click="handlerProcessApply(id,'REFUSE')" :disabled="auditStatus!='UNTREATED'">拒绝</el-button>
             </template>
         </sas-table>
     </sas-card>

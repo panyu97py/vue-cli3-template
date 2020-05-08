@@ -8,6 +8,6 @@ import request from '@/server/utils/request'
 export default (collegeId) => {
     return request({
         url: `/:server/college/quit/${collegeId}`,
-        method: 'path'
+        method: 'patch'
     })
 }

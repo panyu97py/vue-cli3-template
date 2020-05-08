@@ -48,10 +48,11 @@ service.interceptors.response.use(
      * @return {Promise<never>}
      */
     error => {
+        console.log(error.response)
         Notification({
             type:'error',
             title:'错误',
-            message:(error.response.data.data && error.response.data.data.message)||'未知错误'
+            message:(error.response.data && (error.response.data.description || error.response.data.message))||'未知错误'
         })
         return Promise.reject(error)
     }

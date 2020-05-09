@@ -18,6 +18,12 @@ export default {
             path: 'myCollege',
             meta: {title: '我的学院'},
             component: () => import('@/views/app/my/myCollege')
+        },
+        {
+            name: 'myNotify',
+            path: 'myNotify',
+            meta: {title: '我的通知'},
+            component: () => import('@/views/app/my/myNotify')
         }
     ]
 }

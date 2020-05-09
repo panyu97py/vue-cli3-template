@@ -3,12 +3,15 @@
         <template v-slot:headRight>
             <sas-add-button text="添加" @click="handlerAddNotifyDraft"/>
         </template>
-        <sas-table :column-list="columnList" :data="tableData" @delete="handlerDeleteNotifyDraft" @edit="handlerEdit"/>
-        <sas-form-dialog width="500px" label-width="120px" ref="NotifyDraftDetail" edit-title="编辑通知草稿" create-title="创建通知草稿"
+        <sas-table :column-list="columnList" :data="tableData" @delete="handlerDeleteNotifyDraft" @edit="handlerEdit"
+                   @send="handlerSend"/>
+        <sas-form-dialog width="500px" label-width="120px" ref="NotifyDraftDetail" edit-title="编辑通知草稿"
+                         create-title="创建通知草稿"
                          :form-item-list="formItemList"
                          @cancel="handlerCancel" @save="handlerSave">
             <p>接收消息的学院</p>
-            <sas-checkbox-group v-model="receiveColleges" :option="collegeList" label-key="name" value-key="id" selectAllItem/>
+            <sas-checkbox-group v-model="receiveColleges" :option="collegeList" label-key="name" value-key="id"
+                                selectAllItem/>
         </sas-form-dialog>
     </sas-card>
 </template>
@@ -19,7 +22,11 @@
             return {
                 // 表格配置项
                 columnList: [
-                    {label: '操作', key: 'edit,delete', type: 'operate'}
+                    {label: '标题', key: 'title'},
+                    {label: '内容', key: 'content'},
+                    {label: '接收的学院', key: 'receiveCollegesName'},
+                    {label: '状态', key: 'isSentFormat'},
+                    {label: '操作', key: 'send,edit,delete', type: 'operate'}
                 ],
                 // 表格数据
                 tableData: [],
@@ -28,7 +35,7 @@
                 // 学校列表
                 collegeList: [],
                 // 接收消息的学院列表
-                receiveColleges:[]
+                receiveColleges: []
             }
         },
         computed: {
@@ -60,6 +67,8 @@
                 const res = await this.$api.findAllNotifyDraft()
                 this.tableData = res.map(item => ({
                     ...item,
+                    isSentFormat: item.isSent ? '已发送' : '未发送',
+                    receiveCollegesName: item.receiveColleges.map(item => (item.name)).join(',')
                 }))
             },
             /**
@@ -87,9 +96,7 @@
              */
             async handlerEdit({id}) {
                 const data = await this.$api.findNotifyDraftById(id)
-                if (!data.manager) {
-                    data.manager = {id: '', username: '无'}
-                }
+                this.receiveColleges = data.receiveColleges
                 this.handlerOpenFormDialog(data)
             },
             /**
@@ -112,10 +119,10 @@
              * @param close
              */
             async handlerSave({isEdit, data, close}) {
-                if (!data.manager?.id) {
-                    data.manager = null
-                }
-                await this.$api[isEdit ? 'updateNotifyDraft' : 'createNotifyDraft'](data)
+                await this.$api[isEdit ? 'updateNotifyDraft' : 'createNotifyDraft']({
+                    ...data,
+                    receiveColleges: this.receiveColleges
+                })
                 await this.getNotifyDraftList()
                 this.$notify({
                     title: '成功',
@@ -124,6 +131,15 @@
                 })
                 close()
             },
+            async handlerSend({id}) {
+                await this.$api.sendNotifyDraft(id)
+                await this.getNotifyDraftList()
+                this.$notify({
+                    title: '成功',
+                    message: '发送成功',
+                    type: 'success'
+                })
+            }
         },
         mounted() {
             this.getCollegeList()

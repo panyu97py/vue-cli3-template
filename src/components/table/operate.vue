@@ -47,8 +47,8 @@
                         color: '#63A994',
                         icon: 'invite'
                     },
-                    release: {
-                        text: '发布',
+                    send: {
+                        text: '发送',
                         color: '#199c8f',
                         icon: '发布'
                     },

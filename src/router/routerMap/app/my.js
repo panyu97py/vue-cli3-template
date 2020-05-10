@@ -24,6 +24,12 @@ export default {
             path: 'myNotify',
             meta: {title: '我的通知', authority: ['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER','ROLE_USER']},
             component: () => import('@/views/app/my/myNotify')
+        },
+        {
+            name: 'myShare',
+            path: 'myShare',
+            meta: {title: '我的共享', authority: ['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER','ROLE_USER']},
+            component: () => import('@/views/app/my/myShare')
         }
     ]
 }

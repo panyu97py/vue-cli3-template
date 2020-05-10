@@ -4,9 +4,9 @@ import request from '@/server/utils/request'
  * 获取全部我管理的学校
  * @returns {*}
  */
-export default (schoolId) => {
+export default () => {
     return request({
-        url: '/:server/school/findAllMy',
+        url: '/:server/school/findMyAll',
         method: 'get'
     })
 }

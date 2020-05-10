@@ -53,7 +53,7 @@
              * @returns {Promise<void>}
              */
             async getSchoolList() {
-                const res = await this.$api.findAllSchool()
+                const res = await this.$api.findAllMySchool()
                 this.tableData = res.map(item => ({
                     ...item,
                     managerUsername: item.manager?.username || '--'

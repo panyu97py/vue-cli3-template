@@ -5,6 +5,7 @@ import findAllCollege from "./findAllCollege";
 import findCollegeById from "./findCollegeById";
 import quitCollege from "./quitCollege";
 import removeCollegeMember from "./removeCollegeMember";
+import findAllMyCollege from './findAllMyCollege'
 export default {
     createCollege,
     updateCollege,
@@ -12,5 +13,6 @@ export default {
     findAllCollege,
     findCollegeById,
     quitCollege,
-    removeCollegeMember
+    removeCollegeMember,
+    findAllMyCollege
 }

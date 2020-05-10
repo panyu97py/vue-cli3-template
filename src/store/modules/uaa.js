@@ -10,7 +10,8 @@ export default {
     getters: {
         userInfo: state => state.userInfo,
         token: state => state.oauthInfo?.access_token,
-        isLogin: state => state.isLogin
+        isLogin: state => state.isLogin,
+        roles: state => state.userInfo?.roles
     },
     mutations: {
         SET_OAUTH_INFO(state, oauthInfo) {

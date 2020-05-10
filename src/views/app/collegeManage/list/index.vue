@@ -73,7 +73,7 @@
              * @returns {Promise<void>}
              */
             async getCollegeList() {
-                const res = await this.$api.findAllCollege()
+                const res = await this.$api.findAllMyCollege()
                 this.tableData = res.map(item => ({
                     ...item,
                     schoolName: item.school?.name,

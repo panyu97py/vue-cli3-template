@@ -26,6 +26,9 @@
 </template>
 
 <script>
+    import fileSaver from 'file-saver'
+    import JSZip from 'jszip'
+
     export default {
         data() {
             return {
@@ -78,10 +81,21 @@
                 })
             },
             handlerDownLoad() {
-                this.fileList.forEach(({url}) => {
-                    const a = document.createElement('a')
-                    a.href = url
-                    a.click()
+                const zip = new JSZip()
+                const cache = {}
+                const promises = []
+                this.fileList.forEach(item => {
+                    const promise = this.$api.downLoadFile(item.name).then(data => { // 下载文件, 并存成ArrayBuffer对象
+                        zip.file(item.name, data, {binary: true}) // 逐个添加文件
+                        cache[item.name] = data
+                    })
+                    promises.push(promise)
+                })
+
+                Promise.all(promises).then(() => {
+                    zip.generateAsync({type: "blob"}).then(content => { // 生成二进制流
+                        fileSaver.saveAs(content, "附件.zip") // 利用file-saver保存文件
+                    })
                 })
             },
             async handlerView({id}) {

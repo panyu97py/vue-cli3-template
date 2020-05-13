@@ -1,6 +1,27 @@
 <template>
     <sas-card title="我的通知列表">
-        <sas-table :column-list="columnList" :data="tableData" @delete="handlerDelete"/>
+        <sas-table :column-list="columnList" :data="tableData" @delete="handlerDelete" @rowClick="handlerView"/>
+        <sas-form-dialog width="500px" ref="shareDetail" title="通知详情"
+                         :form-item-list="formItemList" disabled>
+            <div v-if="fileList.length>0">
+                <label style="width: 100px;float: left;text-align: right;padding-right: 12px;box-sizing: border-box">文件</label>
+                <div style="margin-left: 100px">
+                    <el-upload
+                            disabled
+                            class="upload-demo"
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :file-list="fileList">
+                    </el-upload>
+                </div>
+            </div>
+
+            <template v-slot:footer>
+                <div>
+                    <el-button type="primary" @click="handlerDownLoad">下载附件</el-button>
+                </div>
+            </template>
+
+        </sas-form-dialog>
     </sas-card>
 </template>
 
@@ -15,8 +36,25 @@
                     {label: '发送时间', key: 'sendTimeFormat'},
                     {label: '操作', key: 'delete', type: 'operate'}
                 ],
-                tableData: []
+                tableData: [],
+                fileList: []
             }
+        },
+        computed: {
+            // 用户列表
+            formItemList() {
+                return [
+                    {
+                        label: '标题',
+                        key: 'title'
+                    },
+                    {
+                        label: '内容',
+                        key: 'content',
+                        type: 'textarea'
+                    }
+                ]
+            },
         },
         methods: {
             /**
@@ -38,6 +76,21 @@
                     type: 'success',
                     message: '删除成功'
                 })
+            },
+            handlerDownLoad() {
+                this.fileList.forEach(({url}) => {
+                    const a = document.createElement('a')
+                    a.href = url
+                    a.click()
+                })
+            },
+            async handlerView({id}) {
+                const notifyDetail = await this.$api.findNotifyById(id)
+                this.$refs.shareDetail.open(notifyDetail)
+                this.fileList = notifyDetail.files ? notifyDetail.files.map(url => ({
+                    name: decodeURI(url).match(/api\/file\/downLoad\/(\S*)/)[1],
+                    url
+                })) : []
             }
         },
         mounted() {
@@ -46,6 +99,17 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    /deep/ {
+        .el-textarea.is-disabled .el-textarea__inner,
+        .el-input.is-disabled .el-input__inner {
+            background: white;
+            color: #606266;
+            border: 1px solid #DCDFE6;
+        }
 
+        .el-upload {
+            display: none;
+        }
+    }
 </style>

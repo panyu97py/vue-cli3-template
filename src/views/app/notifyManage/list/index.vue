@@ -9,6 +9,20 @@
                          create-title="创建通知草稿"
                          :form-item-list="formItemList"
                          @cancel="handlerCancel" @save="handlerSave">
+            <div>
+                <label style="width: 100px;float: left;text-align: right;padding-right: 12px;box-sizing: border-box">文件</label>
+                <div style="margin-left: 100px">
+                    <el-upload
+                            class="upload-demo"
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :on-change="handleChange"
+                            :on-remove="handlerRemove"
+                            :http-request="handlerUpload"
+                            :file-list="fileList">
+                        <el-button size="small" type="primary">点击上传</el-button>
+                    </el-upload>
+                </div>
+            </div>
             <p>接收消息的学院</p>
             <sas-checkbox-group v-model="receiveColleges" :option="collegeList" label-key="name" value-key="id"
                                 selectAllItem/>
@@ -35,7 +49,8 @@
                 // 学校列表
                 collegeList: [],
                 // 接收消息的学院列表
-                receiveColleges: []
+                receiveColleges: [],
+                fileList:[]
             }
         },
         computed: {
@@ -52,7 +67,7 @@
              * @returns {Promise<void>}
              */
             async getCollegeList() {
-                this.collegeList = await this.$api.findAllCollege()
+                this.collegeList = await this.$api.findAllMyCollege()
             },
             async findAllUser() {
                 const res = await this.$api.findAllUser()
@@ -121,7 +136,8 @@
             async handlerSave({isEdit, data, close}) {
                 await this.$api[isEdit ? 'updateNotifyDraft' : 'createNotifyDraft']({
                     ...data,
-                    receiveColleges: this.receiveColleges
+                    receiveColleges: this.receiveColleges,
+                    files: this.fileList.map(item => (item.response))
                 })
                 await this.getNotifyDraftList()
                 this.$notify({
@@ -139,6 +155,20 @@
                     message: '发送成功',
                     type: 'success'
                 })
+            },
+            handleChange(file, fileList) {
+                this.fileList = fileList
+            },
+            handlerRemove(file, fileList){
+                console.log(fileList)
+                this.fileList = fileList
+            },
+            async handlerUpload(data) {
+                let formData = new FormData()
+                formData.append('uploadFile', data.file)
+                const url = await this.$api.uploadFile(formData)
+                return url
+
             }
         },
         mounted() {

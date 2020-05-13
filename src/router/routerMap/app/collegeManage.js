@@ -4,7 +4,7 @@
 export default {
     name: 'collegeManage',
     path: 'collegeManage',
-    meta: {title: '学院管理', authority: ['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER']},
+    meta: {title: '学院管理', authority: ['ROLE_ADMIN', 'ROLE_MANAGER']},
     component: () => import('@/components/routerView'),
     children: [
         {
@@ -16,7 +16,7 @@ export default {
         {
             path: 'applicationReview',
             name: 'collegeApplicationReview',
-            meta: {title: '申请审核', authority: ['ROLE_SYSTEM', 'ROLE_ADMIN', 'ROLE_MANAGER']},
+            meta: {title: '申请审核', authority: ['ROLE_SYSTEM','ROLE_MANAGER']},
             component: () => import('@/views/app/collegeManage/applicationReview')
         },
         {

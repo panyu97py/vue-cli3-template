@@ -1,5 +1,8 @@
 <template>
     <div class="login_view">
+        <div>
+            <h1>教师信息发布与共享平台</h1>
+        </div>
         <sas-form-view>
             <sas-form-item v-for="item in formItemList" :key="item.key" :size="24" :body-size="20" :label="item.label"
                            :showPassword="item.showPassword" v-model="formData[item.key]"/>

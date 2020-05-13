@@ -1,12 +1,13 @@
 import request from '@/server/utils/request'
 
 /**
- * 获取全部我管理的学院
+ * 根据id查找共享
+ * @param type
  * @returns {*}
  */
-export default () => {
+export default (shareId) => {
     return request({
-        url: '/:server/college/findMyAll',
+        url: `/:server/share/findById/${shareId}`,
         method: 'get'
     })
 }

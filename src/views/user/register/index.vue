@@ -1,5 +1,8 @@
 <template>
     <div class="register_view">
+        <div>
+            <h1>注册界面</h1>
+        </div>
         <sas-form-view>
             <sas-form-item v-for="item in formItemList" :key="item.key" :size="24" :body-size="22" :label="item.label"
                            :showPassword="item.showPassword" v-model="formData[item.key]"/>

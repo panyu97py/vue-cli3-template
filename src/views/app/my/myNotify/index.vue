@@ -15,9 +15,9 @@
                 </div>
             </div>
 
-            <template v-slot:footer>
+            <template #footer>
                 <div>
-                    <el-button type="primary" @click="handlerDownLoad">下载附件</el-button>
+                    <el-button type="primary" @click="handlerDownLoad" v-if="fileList.length>0">下载附件</el-button>
                 </div>
             </template>
 

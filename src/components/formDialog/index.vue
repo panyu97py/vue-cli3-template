@@ -8,7 +8,7 @@
                            @focus="handlerFocus(item.key)"/>
         </sas-form-view>
         <slot/>
-        <template v-slot:footer v-if="$slots.footer">
+        <template #footer>
             <slot name="footer"/>
         </template>
     </sas-dialog>
@@ -16,6 +16,9 @@
 
 <script>
     export default {
+        mounted() {
+            console.log(this)
+        },
         props: {
             // 表单 item body 大小
             formItemBodySize: {

@@ -19,13 +19,14 @@ export default {
         isLogin: state => state.isLogin,
         role: state => {
             let level = 3
-            state.userInfo?.roles.forEach(role=>{
-               const roleDetail =  state.roles.find(item=>(item.key===role))||{}
-               if(roleDetail.level<level){
-                   level=roleDetail.level
-               }
+            const roles = state.userInfo?.roles || []
+            roles.forEach(role => {
+                const roleDetail = state.roles.find(item => (item.key === role)) || {}
+                if (roleDetail.level < level) {
+                    level = roleDetail.level
+                }
             })
-            return state.roles.find(item=>(item.level===level)).key
+            return state.roles.find(item => (item.level === level)).key
         }
     },
     mutations: {

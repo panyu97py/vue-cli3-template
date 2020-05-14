@@ -20,6 +20,7 @@
             return {
                 formData: {},
                 formItemList: [
+                    {label: '用户昵称', key: 'nickName'},
                     {label: '用户名', key: 'username'},
                     {label: '密码', key: 'password', showPassword: true},
                     {label: '确认密码', key: 'checkPassword', showPassword: true},

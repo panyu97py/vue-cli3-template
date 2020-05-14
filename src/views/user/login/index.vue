@@ -25,7 +25,19 @@
                 ]
             }
         },
+        created() {
+            this.keyupsubmit();
+        },
         methods: {
+            keyupsubmit(){
+                document.onkeydown=e=>{
+                    e=window.event
+                    let up=e.keyCode;
+                    if(up===13){
+                        this.handlerLogin()
+                    }
+                }
+            },
             /**
              * 去注册
              */

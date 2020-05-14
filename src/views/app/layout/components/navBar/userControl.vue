@@ -5,7 +5,7 @@
                 <svg-icon icon-class="ren" style="line-height: 26px"/>
             </div>
             <div class="layout_navBar_right_userName">
-                <span> {{userInfo?(userInfo.nickname||userInfo.username):'未知'}}</span>
+                <span> {{userInfo?(userInfo.nickName||userInfo.username):'未知'}}</span>
                 <i class="el-icon-caret-bottom"/>
             </div>
         </div>

@@ -18,7 +18,7 @@
             background: #efefef;
             margin: auto;
             width: 500px;
-            height: 300px;
+            height: 360px;
         }
     }
 </style>

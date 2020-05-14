@@ -49,11 +49,11 @@
                     })
                     return
                 }
-                if ((password || '').length <= 6) {
+                if ((password || '').length <= 6||(username || '').length) {
                     this.$notify({
                         title: '错误',
                         type: 'error',
-                        message: '密码长度不能少于6位'
+                        message: '用户名或密码长度不能少于6位'
                     })
                     return
                 }

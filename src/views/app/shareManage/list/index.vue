@@ -1,28 +1,42 @@
 <template>
-    <sas-card title="共享列表">
-        <sas-table :column-list="columnList" :data="tableData" @rowClick="handlerView"/>
-        <sas-form-dialog width="500px" ref="shareDetail" title="共享详情"
-                         :form-item-list="formItemList" disabled>
-            <div v-if="fileList.length>0">
-                <label style="width: 100px;float: left;text-align: right;padding-right: 12px;box-sizing: border-box">文件</label>
-                <div style="margin-left: 100px">
-                    <el-upload
-                            disabled
-                            class="upload-demo"
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :file-list="fileList">
-                    </el-upload>
+    <div>
+        <div class="view_head">
+            <div class="view_head_select">
+                <label class="view_head_select_label">共享类型</label>
+                <div class="view_head_select_body">
+                    <el-select v-model="type" placeholder="请选择共享类型" @change="handlerTypeChange">
+                        <el-option v-for="item in options" :key="item.value" :label="item.label"
+                                   :value="item.value"/>
+                    </el-select>
                 </div>
             </div>
+        </div>
+        <sas-card title="共享列表">
 
-            <template v-slot:footer>
-                <div>
-                    <el-button type="primary" @click="handlerDownLoad">下载附件</el-button>
+            <sas-table :column-list="columnList" :data="tableData" @rowClick="handlerView"/>
+            <sas-form-dialog width="500px" ref="shareDetail" title="共享详情"
+                             :form-item-list="formItemList" disabled>
+                <div v-if="fileList.length>0">
+                    <label style="width: 100px;float: left;text-align: right;padding-right: 12px;box-sizing: border-box">文件</label>
+                    <div style="margin-left: 100px">
+                        <el-upload
+                                disabled
+                                class="upload-demo"
+                                action="https://jsonplaceholder.typicode.com/posts/"
+                                :file-list="fileList">
+                        </el-upload>
+                    </div>
                 </div>
-            </template>
 
-        </sas-form-dialog>
-    </sas-card>
+                <template v-slot:footer>
+                    <div>
+                        <el-button type="primary" @click="handlerDownLoad">下载附件</el-button>
+                    </div>
+                </template>
+
+            </sas-form-dialog>
+        </sas-card>
+    </div>
 </template>
 
 <script>
@@ -42,7 +56,9 @@
                 // 表格数据
                 tableData: [],
                 //文件列表
-                fileList: []
+                fileList: [],
+                // 共享文件类型
+                type: ''
             }
         },
         computed: {
@@ -66,11 +82,20 @@
                     }
                 ]
             },
+            options() {
+                return [
+                    {label: '全部', value: ''},
+                    ...this.$shareTypeList
+                ]
+            }
         },
         mounted() {
             this.getAllShare()
         },
         methods: {
+            async handlerTypeChange(type) {
+                await this.getAllShare(type)
+            },
             handlerDownLoad() {
                 const zip = new JSZip()
                 const cache = {}
@@ -97,8 +122,8 @@
                     url
                 })) : []
             },
-            async getAllShare() {
-                const res = await this.$api.findAllShare()
+            async getAllShare(type) {
+                const res = await this.$api.findAllShare(type)
                 this.tableData = res.map(item => ({
                     ...item,
                     creatorName: item.creator?.username,
@@ -109,6 +134,46 @@
     }
 </script>
 <style lang="scss" scoped>
+    .view_head {
+        background: white;
+        height: 50px;
+        margin: -20px -20px 20px -20px;
+        display: flex;
+        justify-content: space-between;
+
+        &_select {
+            width: 250px;
+
+            &_label {
+                width: 100px;
+                float: left;
+                font: {
+                    size: 14px;
+                };
+                line-height: 50px;
+            }
+
+            &_body {
+                margin-left: 100px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+
+                /deep/ {
+                    .el-input__icon {
+                        line-height: 36px;
+                    }
+
+                    .el-input__inner {
+                        line-height: 36px;
+                        height: 36px;
+                    }
+                }
+
+            }
+        }
+    }
+
     /deep/ {
         .el-textarea.is-disabled .el-textarea__inner,
         .el-input.is-disabled .el-input__inner {

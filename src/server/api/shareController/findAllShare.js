@@ -10,7 +10,7 @@ export default (type) => {
         url: '/:server/share/findAll',
         method: 'get',
         params: {
-            type
+            type: type || null
         }
     })
 }

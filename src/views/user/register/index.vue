@@ -41,11 +41,11 @@
                     return
                 }
                 const {password, username} = this.formData
-                if (/\S+/.test(username)) {
+                if (!/^[A-Za-z0-9]+$/.test(username)) {
                     this.$notify({
                         title: '错误',
                         type: 'error',
-                        message: '用户名中不能包含空格'
+                        message: '用户名只能由英文和数字组成'
                     })
                     return
                 }

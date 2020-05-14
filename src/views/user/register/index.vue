@@ -32,21 +32,38 @@
                 this.$router.push({name: 'login'})
             },
             async handlerRegister() {
-                if(this.formData.password!==this.formData.checkPassword){
+                if (this.formData.password !== this.formData.checkPassword) {
                     this.$notify({
-                        title:'错误',
-                        type:'error',
-                        message:'两次输入的密码不一致'
+                        title: '错误',
+                        type: 'error',
+                        message: '两次输入的密码不一致'
                     })
                     return
                 }
-               await this.$api.register(this.formData)
+                const {password, username} = this.formData
+                if (/\S+/.test(username)) {
+                    this.$notify({
+                        title: '错误',
+                        type: 'error',
+                        message: '用户名中不能包含空格'
+                    })
+                    return
+                }
+                if ((password || '').length <= 6) {
+                    this.$notify({
+                        title: '错误',
+                        type: 'error',
+                        message: '密码长度不能少于6位'
+                    })
+                    return
+                }
+                await this.$api.register(this.formData)
                 this.$notify({
-                    title:'成功',
-                    type:'success',
-                    message:'注册成功'
+                    title: '成功',
+                    type: 'success',
+                    message: '注册成功'
                 })
-                await this.$router.push({name:'login'})
+                await this.$router.push({name: 'login'})
             }
         }
     }

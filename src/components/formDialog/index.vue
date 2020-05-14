@@ -3,6 +3,7 @@
         <sas-form-view :model="data" :rules="rules" :label-width="labelWidth" :disabled="disabled">
             <sas-form-item v-for="(item,index) in formItemList" :key="index" :options="item" :value="data[item.key]"
                            :size="formItemSize" :body-size="formItemBodySize" :select-all="formItemSelectAll"
+                           :show-password="item.showPassword"
                            @change="handlerChange($event,item.key)"
                            @input="handlerInput($event,item.key)"
                            @focus="handlerFocus(item.key)"/>

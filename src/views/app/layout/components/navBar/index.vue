@@ -8,7 +8,7 @@
       <breadcrumb class="layout_navBar_left_breadcrumb"/>
     </div>
     <div class="layout_navBar_right">
-      <userControl/>
+      <userControl @modifyPassword="$emit('modifyPassword')"/>
       <loginOutButton @click="$emit('loginOut')"/>
     </div>
   </div>

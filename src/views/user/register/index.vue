@@ -49,7 +49,7 @@
                     })
                     return
                 }
-                if ((password || '').length <= 6||(username || '').length) {
+                if ((password || '').length < 6 || (username || '').length < 6) {
                     this.$notify({
                         title: '错误',
                         type: 'error',

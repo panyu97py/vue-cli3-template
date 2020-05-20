@@ -5,6 +5,15 @@
         </template>
         <sas-table :column-list="columnList" :data="tableData" @delete="handlerDeleteCollege" @edit="handlerEdit"
                    @rowClick="toMemberManager"/>
+        <div style="display: flex;justify-content:flex-end">
+            <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :current-page="currentPage"
+                    @current-change="handlerPageChange"
+                    :total="totalPage">
+            </el-pagination>
+        </div>
         <sas-form-dialog width="500px" ref="collegeDetail" edit-title="编辑学院" create-title="创建学院"
                          :form-item-list="formItemList"
                          @cancel="handlerCancel" @save="handlerSave"/>
@@ -27,7 +36,12 @@
                 // 用户列表
                 userList: [],
                 // 学校列表
-                schoolList: []
+                schoolList: [],
+                // 总页码
+                totalPage: 0,
+                // 当前页码
+                currentPage: 0,
+                collegeList:[]
             }
         },
         computed: {
@@ -68,17 +82,27 @@
                 this.userList = res
                 this.userList.unshift({id: '', username: '无'})
             },
+            handlerPageChange(page) {
+                this.pagination(page)
+            },
+            pagination(page) {
+                const {totalPage, currentPage, data} = this.$utils.pagination(this.collegeList, page)
+                this.tableData = data
+                this.totalPage = totalPage
+                this.currentPage = currentPage
+            },
             /**
              * 获取学院列表
              * @returns {Promise<void>}
              */
             async getCollegeList() {
                 const res = await this.$api.findAllMyCollege()
-                this.tableData = res.map(item => ({
+                this.collegeList = res.map(item => ({
                     ...item,
                     schoolName: item.school?.name,
                     managerUsername: item.manager?.username || '--'
                 }))
+                this.pagination(1)
             },
             /**
              * 添加学院

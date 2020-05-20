@@ -5,6 +5,15 @@
         </template>
         <sas-table :column-list="columnList" :data="tableData" @delete="handlerDeleteNotifyDraft" @edit="handlerEdit"
                    @send="handlerSend"/>
+        <div style="display: flex;justify-content:flex-end">
+            <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :current-page="currentPage"
+                    @current-change="handlerPageChange"
+                    :total="totalPage">
+            </el-pagination>
+        </div>
         <sas-form-dialog width="500px" label-width="120px" ref="NotifyDraftDetail" edit-title="编辑通知草稿"
                          create-title="创建通知草稿"
                          :form-item-list="formItemList"
@@ -44,24 +53,48 @@
                 ],
                 // 表格数据
                 tableData: [],
+                // 通知草稿数据
+                notifyDraftList: [],
                 // 用户列表
                 userList: [],
+                // 总页码
+                totalPage: 0,
+                // 当前页码
+                currentPage: 0,
                 // 学校列表
                 collegeList: [],
                 // 接收消息的学院列表
                 receiveColleges: [],
-                fileList:[]
+                fileList: []
             }
         },
         computed: {
             formItemList() {
                 return [
                     {label: '标题', key: 'title'},
+                    {
+                        label: '是否置顶',
+                        key: 'isTop',
+                        type: 'select',
+                        list: [
+                            {label: '是', value: true},
+                            {label: '否', value: false}
+                        ]
+                    },
                     {label: '内容', key: 'content', type: 'textarea'}
                 ]
             }
         },
         methods: {
+            handlerPageChange(page) {
+                this.pagination(page)
+            },
+            pagination(page) {
+                const {totalPage, currentPage, data} = this.$utils.pagination(this.notifyDraftList, page)
+                this.tableData = data
+                this.totalPage = totalPage
+                this.currentPage = currentPage
+            },
             /**
              * 获取学院列表
              * @returns {Promise<void>}
@@ -80,11 +113,12 @@
              */
             async getNotifyDraftList() {
                 const res = await this.$api.findAllNotifyDraft()
-                this.tableData = res.map(item => ({
+                this.notifyDraftList = res.map(item => ({
                     ...item,
                     isSentFormat: item.isSent ? '已发送' : '未发送',
                     receiveCollegesName: item.receiveColleges.map(item => (item.name)).join(',')
                 }))
+                this.pagination(1)
             },
             /**
              * 添加学院
@@ -159,7 +193,7 @@
             handleChange(file, fileList) {
                 this.fileList = fileList
             },
-            handlerRemove(file, fileList){
+            handlerRemove(file, fileList) {
                 console.log(fileList)
                 this.fileList = fileList
             },

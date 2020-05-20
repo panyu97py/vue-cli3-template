@@ -14,6 +14,15 @@
         <sas-card title="共享列表">
 
             <sas-table :column-list="columnList" :data="tableData" @rowClick="handlerView"/>
+            <div style="display: flex;justify-content:flex-end">
+                <el-pagination
+                        background
+                        layout="prev, pager, next"
+                        :current-page="currentPage"
+                        @current-change="handlerPageChange"
+                        :total="totalPage">
+                </el-pagination>
+            </div>
             <sas-form-dialog width="500px" ref="shareDetail" title="共享详情"
                              :form-item-list="formItemList" disabled>
                 <div v-if="fileList.length>0">
@@ -57,8 +66,13 @@
                 tableData: [],
                 //文件列表
                 fileList: [],
+                shareList:[],
                 // 共享文件类型
-                type: ''
+                type: '',
+                // 总页码
+                totalPage: 0,
+                // 当前页码
+                currentPage: 0
             }
         },
         computed: {
@@ -93,6 +107,15 @@
             this.getAllShare()
         },
         methods: {
+            handlerPageChange(page) {
+                this.pagination(page)
+            },
+            pagination(page) {
+                const {totalPage, currentPage, data} = this.$utils.pagination(this.shareList, page)
+                this.tableData = data
+                this.totalPage = totalPage
+                this.currentPage = currentPage
+            },
             async handlerTypeChange(type) {
                 await this.getAllShare(type)
             },
@@ -124,11 +147,12 @@
             },
             async getAllShare(type) {
                 const res = await this.$api.findAllShare(type)
-                this.tableData = res.map(item => ({
+                this.shareList = res.map(item => ({
                     ...item,
                     creatorName: item.creator?.username,
                     createTimeFormat: this.$moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
                 }))
+                this.pagination(1)
             }
         }
     }

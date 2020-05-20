@@ -4,6 +4,15 @@
             <sas-add-button text="添加学校" @click="handlerAddSchool"/>
         </template>
         <sas-table :column-list="columnList" :data="tableData" @delete="handlerDeleteSchool" @edit="handlerEdit"/>
+        <div style="display: flex;justify-content:flex-end">
+            <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :current-page="currentPage"
+                    @current-change="handlerPageChange"
+                    :total="totalPage">
+            </el-pagination>
+        </div>
         <sas-form-dialog width="500px" ref="schoolDetail" edit-title="编辑学校" create-title="创建学校"
                          :form-item-list="formItemList"
                          @cancel="handlerCancel" @save="handlerSave"/>
@@ -20,10 +29,16 @@
                     {label: '管理者', key: 'managerUsername'},
                     {label: '操作', key: 'edit,delete', type: 'operate'}
                 ],
+                // 学校列表
+                schoolList:[],
                 // 表格数据
                 tableData: [],
                 // 用户列表
-                userList: []
+                userList: [],
+                // 总页码
+                totalPage: 0,
+                // 当前页码
+                currentPage: 0,
             }
         },
         computed: {
@@ -43,6 +58,15 @@
             }
         },
         methods: {
+            handlerPageChange(page) {
+                this.pagination(page)
+            },
+            pagination(page) {
+                const {totalPage, currentPage, data} = this.$utils.pagination(this.schoolList, page)
+                this.tableData = data
+                this.totalPage = totalPage
+                this.currentPage = currentPage
+            },
             async findAllUser() {
                 const res = await this.$api.findAllUser()
                 this.userList = res
@@ -54,10 +78,11 @@
              */
             async getSchoolList() {
                 const res = await this.$api.findAllMySchool()
-                this.tableData = res.map(item => ({
+                this.schoolList = res.map(item => ({
                     ...item,
                     managerUsername: item.manager?.username || '--'
                 }))
+                this.pagination(1)
             },
             /**
              * 添加学校

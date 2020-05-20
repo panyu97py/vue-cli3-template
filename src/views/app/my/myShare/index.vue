@@ -4,6 +4,15 @@
             <sas-add-button text="添加共享" @click="handlerAddShare"/>
         </template>
         <sas-table :column-list="columnList" :data="tableData" @delete="handlerDelete" @edit="handlerEdit"/>
+        <div style="display: flex;justify-content:flex-end">
+            <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :current-page="currentPage"
+                    @current-change="handlerPageChange"
+                    :total="totalPage">
+            </el-pagination>
+        </div>
         <sas-form-dialog width="500px" ref="shareDetail" edit-title="编辑共享" create-title="创建共享"
                          :form-item-list="formItemList"
                          @cancel="handlerCancel" @save="handlerSave">
@@ -38,7 +47,12 @@
                 // 表格数据
                 tableData: [],
                 //文件列表
-                fileList: []
+                fileList: [],
+                // 总页码
+                totalPage: 0,
+                // 当前页码
+                currentPage: 0,
+                shareList:[]
             }
         },
         computed: {
@@ -85,7 +99,16 @@
                 close()
             },
             async getMyShareList() {
-                this.tableData = await this.$api.findMyShare()
+                this.shareList = await this.$api.findMyShare()
+            },
+            handlerPageChange(page) {
+                this.pagination(page)
+            },
+            pagination(page) {
+                const {totalPage, currentPage, data} = this.$utils.pagination(this.shareList, page)
+                this.tableData = data
+                this.totalPage = totalPage
+                this.currentPage = currentPage
             },
             async handlerSave({isEdit, data, close}) {
                 if(this.fileList.length===0){

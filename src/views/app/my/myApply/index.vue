@@ -4,6 +4,15 @@
             <sas-add-button text="创建申请" @click="handlerAddApply"/>
         </template>
         <sas-table :column-list="columnList" :data="tableData" @delete="handlerDeleteApply" @edit="handlerEdit"/>
+        <div style="display: flex;justify-content:flex-end">
+            <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :current-page="currentPage"
+                    @current-change="handlerPageChange"
+                    :total="totalPage">
+            </el-pagination>
+        </div>
         <sas-form-dialog width="500px" ref="ApplyDetail" edit-title="编辑申请" create-title="创建申请"
                          :form-item-list="formItemList"
                          @change="handlerChange"
@@ -32,7 +41,12 @@
                 // 用户列表
                 schoolList: [],
                 // 学院列表
-                collegeList: []
+                collegeList: [],
+                // 总页码
+                totalPage: 0,
+                // 当前页码
+                currentPage: 0,
+                applyList:[]
             }
         },
         computed: {
@@ -76,7 +90,7 @@
              */
             async getApplyList() {
                 const res = await this.$api.findAllApply()
-                this.tableData = res.map(item => ({
+                this.applyList = res.map(item => ({
                     ...item,
                     createTimeFormat: this.$moment(item.createTime).format('YYYY-MM-DD HH:mm:ss'),
                     processTimeFormat: item.processTime ? this.$moment(item.processTime).format('YYYY-MM-DD HH:mm:ss') : '--',
@@ -85,6 +99,16 @@
                     managerUsername: item.manager?.username || '--',
                     auditStatusFormat: this.auditStatusFormatMap[item.auditStatus]
                 }))
+                this.pagination(1)
+            },
+            handlerPageChange(page) {
+                this.pagination(page)
+            },
+            pagination(page) {
+                const {totalPage, currentPage, data} = this.$utils.pagination(this.applyList, page)
+                this.tableData = data
+                this.totalPage = totalPage
+                this.currentPage = currentPage
             },
             /**
              * 添加申请

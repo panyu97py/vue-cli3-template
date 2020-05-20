@@ -1,6 +1,15 @@
 <template>
     <sas-card title="我的通知列表">
         <sas-table :column-list="columnList" :data="tableData" @delete="handlerDelete" @rowClick="handlerView"/>
+        <div style="display: flex;justify-content:flex-end">
+            <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :current-page="currentPage"
+                    @current-change="handlerPageChange"
+                    :total="totalPage">
+            </el-pagination>
+        </div>
         <sas-form-dialog width="500px" ref="shareDetail" title="通知详情"
                          :form-item-list="formItemList" disabled>
             <div v-if="fileList.length>0">
@@ -32,14 +41,20 @@
     export default {
         data() {
             return {
+                // 总页码
+                totalPage: 0,
+                // 当前页码
+                currentPage: 0,
                 columnList: [
                     {label: '标题', key: 'title'},
                     {label: '内容', key: 'content'},
                     {label: '发送人', key: 'creatorName'},
                     {label: '发送时间', key: 'sendTimeFormat'},
+                    {label: '是否置顶消息', key: 'isTopFormat'},
                     {label: '操作', key: 'delete', type: 'operate'}
                 ],
                 tableData: [],
+                notifyList:[],
                 fileList: []
             }
         },
@@ -65,11 +80,28 @@
              */
             async getMyAllNotify() {
                 const res = await this.$api.findAllNotify()
-                this.tableData = res.map(item => ({
+                this.notifyList = res.map(item => ({
                     ...item,
                     creatorName: item.creator?.username,
-                    sendTimeFormat: this.$moment(item.sendTime).format('YYYY-MM-DD HH:mm:ss')
-                }))
+                    sendTimeFormat: this.$moment(item.sendTime).format('YYYY-MM-DD HH:mm:ss'),
+                    isTopFormat:item.isTop?'是':'否'
+                })).sort((a)=>{
+                    if(a.isTop){
+                        return -1
+                    }else{
+                        return 0
+                    }
+                })
+                this.pagination(1)
+            },
+            handlerPageChange(page) {
+                this.pagination(page)
+            },
+            pagination(page) {
+                const {totalPage, currentPage, data} = this.$utils.pagination(this.notifyList, page)
+                this.tableData = data
+                this.totalPage = totalPage
+                this.currentPage = currentPage
             },
             async handlerDelete({id}) {
                 await this.$api.deleteNotify(id)

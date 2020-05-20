@@ -20,7 +20,7 @@
                         layout="prev, pager, next"
                         :current-page="currentPage"
                         @current-change="handlerPageChange"
-                        :total="totalPage">
+                        :page-count="totalPage">
                 </el-pagination>
             </div>
             <sas-form-dialog width="500px" ref="shareDetail" title="共享详情"

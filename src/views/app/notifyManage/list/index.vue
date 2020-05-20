@@ -11,7 +11,7 @@
                     layout="prev, pager, next"
                     :current-page="currentPage"
                     @current-change="handlerPageChange"
-                    :total="totalPage">
+                    :page-count="totalPage">
             </el-pagination>
         </div>
         <sas-form-dialog width="500px" label-width="120px" ref="NotifyDraftDetail" edit-title="编辑通知草稿"

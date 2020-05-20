@@ -10,7 +10,7 @@
                     layout="prev, pager, next"
                     :current-page="currentPage"
                     @current-change="handlerPageChange"
-                    :total="totalPage">
+                    :page-count="totalPage">
             </el-pagination>
         </div>
         <sas-form-dialog width="500px" ref="ApplyDetail" edit-title="编辑申请" create-title="创建申请"

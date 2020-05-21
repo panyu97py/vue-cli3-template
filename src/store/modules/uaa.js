@@ -5,13 +5,29 @@ export default {
     state: {
         userInfo: null,
         oauthInfo: {},
-        isLogin: false
+        isLogin: false,
+        roles: [
+            {key: 'ROLE_SYSTEM', level: 0},
+            {key: 'ROLE_ADMIN', level: 1},
+            {key: 'ROLE_MANAGER', level: 2},
+            {key: 'ROLE_USER', level: 3}
+        ]
     },
     getters: {
         userInfo: state => state.userInfo,
         token: state => state.oauthInfo?.access_token,
         isLogin: state => state.isLogin,
-        roles: state => state.userInfo?.roles
+        role: state => {
+            let level = 3
+            const roles = state.userInfo?.roles || []
+            roles.forEach(role => {
+                const roleDetail = state.roles.find(item => (item.key === role)) || {}
+                if (roleDetail.level < level) {
+                    level = roleDetail.level
+                }
+            })
+            return state.roles.find(item => (item.level === level)).key
+        }
     },
     mutations: {
         SET_OAUTH_INFO(state, oauthInfo) {

@@ -2,6 +2,7 @@ import axios from 'axios'
 import requestOauth from "@/server/utils/requestOauth";
 import convertUri from "@/server/utils/convertUri";
 import {Notification} from "element-ui";
+import $store from '@/store'
 
 /**
  * 创建 axios 实例
@@ -40,7 +41,7 @@ service.interceptors.response.use(
      * @return {any}
      */
     response => {
-        return response.data?.data||response.data
+        return response.data?.data || response.data
     },
     /**
      * 响应出错的拦截
@@ -49,11 +50,28 @@ service.interceptors.response.use(
      */
     error => {
         console.log(error.response)
-        Notification({
-            type:'error',
-            title:'错误',
-            message:(error.response.data && (error.response.data.description || error.response.data.message))||'未知错误'
-        })
+        if (error.response?.status === 401) {
+            Notification({
+                type: 'error',
+                title: '错误',
+                message: /api\/oauth\/token/.test(error.response?.config?.url) ? '用户名或密码错误' : '您的登陆已过期'
+            })
+            if (!/api\/oauth\/token/.test(error.response?.config?.url)) {
+                $store.dispatch('loginOut')
+            }
+        } else if (error.response?.status === 403) {
+            Notification({
+                type: 'error',
+                title: '错误',
+                message: '权限不足'
+            })
+        } else {
+            Notification({
+                type: 'error',
+                title: '错误',
+                message: (error.response.data && (error.response.data.description || error.response.data.message)) || '未知错误'
+            })
+        }
         return Promise.reject(error)
     }
 )

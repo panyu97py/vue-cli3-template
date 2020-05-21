@@ -1,5 +1,8 @@
 <template>
     <div class="register_view">
+        <div>
+            <h1>注册界面</h1>
+        </div>
         <sas-form-view>
             <sas-form-item v-for="item in formItemList" :key="item.key" :size="24" :body-size="22" :label="item.label"
                            :showPassword="item.showPassword" v-model="formData[item.key]"/>
@@ -17,6 +20,7 @@
             return {
                 formData: {},
                 formItemList: [
+                    {label: '用户昵称', key: 'nickName'},
                     {label: '用户名', key: 'username'},
                     {label: '密码', key: 'password', showPassword: true},
                     {label: '确认密码', key: 'checkPassword', showPassword: true},
@@ -28,21 +32,38 @@
                 this.$router.push({name: 'login'})
             },
             async handlerRegister() {
-                if(this.formData.password!==this.formData.checkPassword){
+                if (this.formData.password !== this.formData.checkPassword) {
                     this.$notify({
-                        title:'错误',
-                        type:'error',
-                        message:'两次输入的密码不一致'
+                        title: '错误',
+                        type: 'error',
+                        message: '两次输入的密码不一致'
                     })
                     return
                 }
-               await this.$api.register(this.formData)
+                const {password, username} = this.formData
+                if (!/^[A-Za-z0-9]+$/.test(username)) {
+                    this.$notify({
+                        title: '错误',
+                        type: 'error',
+                        message: '用户名只能由英文和数字组成'
+                    })
+                    return
+                }
+                if ((password || '').length < 6 || (username || '').length < 6) {
+                    this.$notify({
+                        title: '错误',
+                        type: 'error',
+                        message: '用户名或密码长度不能少于6位'
+                    })
+                    return
+                }
+                await this.$api.register(this.formData)
                 this.$notify({
-                    title:'成功',
-                    type:'success',
-                    message:'注册成功'
+                    title: '成功',
+                    type: 'success',
+                    message: '注册成功'
                 })
-                await this.$router.push({name:'login'})
+                await this.$router.push({name: 'login'})
             }
         }
     }

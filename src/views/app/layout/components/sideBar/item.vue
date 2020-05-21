@@ -45,14 +45,8 @@
         props: ['item', 'basePath'],
         computed: {
             isAuthorized() {
-                let isAuthorized = false
-                const roles = this.$store.getters.roles
-                for (let i = 0; i < roles.length; i++) {
-                    if (this.item.meta?.authority.indexOf(roles[i]) >= 0) {
-                        isAuthorized = true
-                    }
-                }
-                return isAuthorized
+                const role = this.$store.getters.role
+                return this.item.meta?.authority.indexOf(role)>=0
             }
         },
         methods: {

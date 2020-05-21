@@ -59,3 +59,8 @@
         }
     }
 </script>
+<style scoped>
+    /*.layout_sideBar_head_logo{*/
+    /*    background: url("~@/assets/logo.jpeg") no-repeat 50% 50%;*/
+    /*}*/
+</style>

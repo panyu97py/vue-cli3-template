@@ -5,6 +5,8 @@ import applyController from "./applyController";
 import oauthController from './oauthController'
 import notifyDraftController from './notifyDraftController'
 import notifyController from './notifyController'
+import fileController from './fileController'
+import shareController from './shareController'
 export default {
     ...schoolController,
     ...collegeController,
@@ -12,5 +14,7 @@ export default {
     ...applyController,
     ...oauthController,
     ...notifyDraftController,
-    ...notifyController
+    ...notifyController,
+    ...fileController,
+    ...shareController
 }

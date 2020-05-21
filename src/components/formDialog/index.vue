@@ -1,18 +1,25 @@
 <template>
     <sas-dialog ref="formDialog" :title="displayTitle" @save="handlerSave" @cancel="handlerCancel" :width="width">
-        <sas-form-view :model="data" :rules="rules" :label-width="labelWidth">
+        <sas-form-view :model="data" :rules="rules" :label-width="labelWidth" :disabled="disabled">
             <sas-form-item v-for="(item,index) in formItemList" :key="index" :options="item" :value="data[item.key]"
                            :size="formItemSize" :body-size="formItemBodySize" :select-all="formItemSelectAll"
+                           :show-password="item.showPassword"
                            @change="handlerChange($event,item.key)"
                            @input="handlerInput($event,item.key)"
                            @focus="handlerFocus(item.key)"/>
         </sas-form-view>
         <slot/>
+        <template #footer>
+            <slot name="footer"/>
+        </template>
     </sas-dialog>
 </template>
 
 <script>
     export default {
+        mounted() {
+            console.log(this)
+        },
         props: {
             // 表单 item body 大小
             formItemBodySize: {
@@ -42,6 +49,7 @@
                 type: String,
                 default: () => '100px'
             },
+            disabled: Boolean,
             // 表单数据校验规则
             rules: Object,
             // 表单配置项目

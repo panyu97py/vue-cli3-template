@@ -4,13 +4,13 @@
 export default {
     name: 'schoolManage',
     path: 'schoolManage',
-    meta: {title: '学校管理', authority: ['ROLE_SYSTEM']},
+    meta: {title: '学校管理', authority: ['ROLE_SYSTEM','ROLE_ADMIN']},
     component: () => import('@/components/routerView'),
     children: [
         {
             path: 'list',
             name: 'schoolManageList',
-            meta: {title: '学校列表', authority: ['ROLE_SYSTEM']},
+            meta: {title: '学校列表', authority: ['ROLE_SYSTEM','ROLE_ADMIN']},
             component: () => import('@/views/app/schoolManage/list')
         }
     ]

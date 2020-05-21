@@ -48,6 +48,7 @@
                     schoolName: item.school?.name,
                     managerUsername: item.manager?.username || '--'
                 }))
+                this.pagination(1)
             },
             handlerPageChange(page) {
                 this.pagination(page)
